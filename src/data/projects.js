@@ -1,0 +1,2786 @@
+const projects = [
+  
+  // 1. SOLVIX — AI-Powered Multi-Agent Microservices Platform
+  {
+    id: "solvix",
+    name: "Solvix",
+    url: "/solvix.png",
+    technologies: [
+      "MERN", "LangChain", "LangGraph", "Docker", "Redis",
+      "Nginx", "Stripe", "Microservices", "Express Gateway",
+      "Groq AI", "Gemini", "MongoDB", "Firebase Auth",
+    ],
+    description:
+      "AI-Powered Multi-Agent Platform built with MERN Stack, Microservices, LangChain, LangGraph, Docker, Redis and Nginx — a unified system for productivity, coding, job searching, and career development with free AI tools and a premium AI career suite.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "SOLVIX is my most ambitious engineering achievement — an AI-Powered Multi-Agent Platform that unifies productivity, coding assistance, job hunting, and career development into a single intelligent workspace.",
+          "The system is composed of eight independent microservices running behind a single Express Gateway, containerized with Docker, connected through Redis, and fronted by Nginx for load balancing and SSL termination. This architecture mirrors how real-world production AI platforms are built at scale — decoupled services, isolated databases, centralized auth, and atomic credit billing.",
+          "Every AI capability — chat, search, coding, image generation, PDF/PPT creation, resume analysis, file RAG, and job search — runs as its own agent powered by LangChain and LangGraph state machines, routed intelligently by a central Router Agent.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "Free AI Tools — A Complete Creative Suite",
+        items: [
+          "AI Chat with conversation memory and markdown rendering",
+          "Web Search Agent powered by Tavily with real-time results",
+          "Coding Agent trained on a production-grade system prompt",
+          "PDF Generation with structured documents via PDFKit",
+          "PPT Generation with slide-by-slide content via pptxgenjs",
+          "AI Image Generation via Pollinations + Cloudinary CDN",
+          "File Analysis — PDF, DOCX, TXT, and images (Gemini Vision)",
+          "RAG Q&A — upload a file, ask questions, get cited answers via Pinecone",
+          "Job Search Agent — Tavily-powered with 3-day freshness filtering",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Premium AI Career Suite",
+        items: [
+          "AI Resume Analyzer with ATS score, strengths, improvements, and roadmap",
+          "AI CV Generator with structured output and AI-written summaries",
+          "CV → AI Mock Interview covering DSA, Technical, Project, Behavioral, and HR rounds",
+          "Mock interview solutions in both JavaScript AND Python",
+          "Batch-based interview generation — 15 fresh questions per request",
+          "CV → AI Portfolio Generator producing complete HTML/CSS/JS websites",
+          "Personalized job recommendations based on resume analysis",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete Career Pipeline",
+        paragraphs: [
+          "SOLVIX is built around a single, coherent career journey — one that mirrors how a real professional grows:",
+          "Upload CV → AI Analysis → ATS Evaluation → Skill Gap Detection → Personalized Improvement Roadmap → Job Discovery → Job Recommendations → AI CV Generation → Portfolio Website → AI Mock Interview Practice → Continuous Iteration.",
+          "Each stage feeds the next. The resume analysis powers the mock interview, the mock interview powers the portfolio, and the portfolio becomes the final artifact the user ships to the world.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Stripe Billing & Atomic Credit System",
+        paragraphs: [
+          "SOLVIX runs on a credit-based economy. Free AI tools consume nothing. Premium career actions — resume upload, CV generation, portfolio generation, and mock interview — each deduct exactly 2 credits atomically through the Gateway.",
+          "The billing pipeline is built on Stripe Checkout with three tiers — Free (10 credits), Starter ($3.99 / 100 credits), and Pro ($4.99 / 200 credits). Every payment flows through a webhook with idempotent fulfillment — credits are added exactly once per Stripe session, verified by session ID, even if the webhook fires multiple times.",
+          "The credit deduction middleware sits in the Gateway and uses a `creditsAlreadyDeducted` flag to prevent double deduction. If a downstream service fails after deduction, the credit is refunded — no user loses credits on a failed request.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "SOLVIX taught me how to architect and ship a real production AI platform — not a tutorial project.",
+          "I learned LangChain and LangGraph state machines for multi-agent routing. I learned how to design a unified API Gateway that handles auth, credits, rate limiting, and activity tracking across eight independent services. I learned Redis pipelines for high-throughput metrics, sliding-window rate limiting, Docker containerization with healthchecks, Nginx reverse proxy configuration, Stripe webhook idempotency, atomic credit deduction, and how to integrate four different AI providers (Groq, Gemini, Tavily, Pinecone) into a coherent system.",
+          "Above all, I learned that building an AI product is 20% AI and 80% engineering — auth, billing, caching, rate limiting, observability, and resilient infrastructure are what make the AI usable at scale.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/Solvix",
+    demoLink: "https://res.cloudinary.com/dcpxgn271/video/upload/v1792223434/1017_2.mp4",
+    category: "AI / Multi-Agent Platform",
+    year: "2026",
+    status: "Live",
+    role: "Full-Stack & AI Engineer",
+    duration: "4 months",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["React 19", "Vite", "Tailwind CSS 4", "Redux Toolkit", "GSAP", "React Router 7", "React Markdown", "Remark GFM", "Recharts", "React Hot Toast", "React Icons", "React Syntax Highlighter", "html2pdf.js", "js-beautify", "Prettier"],
+      backend: ["Node.js", "Express 5", "Express Gateway", "Mongoose 9", "JWT", "Helmet", "cookie-parser", "morgan", "express-http-proxy", "ioredis", "dotenv"],
+      ai: ["LangChain", "LangGraph", "@langchain/groq", "Groq LLaMA 3.3 70B", "Groq openai/gpt-oss-120b", "Groq Qwen 3.8 27B Vision", "Gemini 2.5 Flash", "Gemini 2.0 Flash", "Tavily", "PDFKit", "pptxgenjs", "Pinecone", "@google/generative-ai"],
+      infrastructure: ["Docker", "Nginx", "Redis", "MongoDB Atlas", "Firebase Auth", "Stripe", "Cloudinary", "Pinecone", "Nodemailer OAuth2"],
+    },
+
+    architecture: {
+      title: "Microservices Architecture — Eight Services Behind One Gateway",
+      description:
+        "Each capability runs as an isolated service, proxied through a single Express Gateway that handles auth, credits, rate limiting, and activity tracking. The Gateway uses express-http-proxy to route requests to 8 independent microservices — each with its own database, deployment, and lifecycle.",
+      layers: [
+        { name: "Client", items: ["React 19 SPA", "Redux Toolkit", "Firebase Auth", "Stripe Checkout", "GSAP animations", "React Router 7"] },
+        { name: "Gateway", items: ["Express Gateway (port 5000)", "JWT protect middleware", "Credit deduction (2 credits)", "Activity tracking (Redis pipeline)", "Rate limiting (auth + upload)", "ProxyWithHeader", "addUserHeadersToProxy"] },
+        { name: "Services", items: ["Auth (5001)", "Chat (5002)", "Agent (5003)", "Resume (5004)", "Portfolio (5005)", "Billing (5006)", "Mock Interview (5007)", "Admin routes"] },
+        { name: "Data", items: ["MongoDB (per service)", "Redis (sessions, cache, activity)", "Cloudinary (images, PDFs, PPTs)", "Stripe", "Pinecone (RAG)"] },
+        { name: "Infrastructure", items: ["Docker", "Nginx", "Docker Compose", "Redis with appendonly"] },
+      ],
+    },
+
+    servicesLabel: "Microservices",
+    middlewareLabel: "Gateway Middleware",
+
+    services: [
+      { name: "Auth Service", path: "/auth", type: "free", port: "5001", description: "Firebase token verification, JWT issuance (7-day HTTP-only cookie), user CRUD, credit management, admin user stats/list, plan distribution, deduct-credits endpoint." },
+      { name: "Chat Service", path: "/chat", type: "free", port: "5002", description: "Multi-turn conversational agent with persistent history. CreateConversation, GetConversions, UpdatedConversions, SaveMessage, GetMessages. Stores PDF/PPT/Images metadata." },
+      { name: "Agent Service", path: "/agent", type: "free", port: "5003", description: "LangGraph agents: router, chat, search, coding, image, PDF, PPT, file analysis, RAG, job search. Handles file upload (PDF/DOCX/TXT/image) with Pinecone storage. Gemini Vision for images." },
+      { name: "Resume Service", path: "/resume", type: "mixed", port: "5004", description: "Resume upload (2 credits) with SHA-256 deduplication, AI analysis (ATS score, strengths, improvements, roadmap), job recommendations. Also serves CV routes at /cv." },
+      { name: "CV Service", path: "/cv", type: "paid", credits: 2, port: "5004", description: "AI CV generation from structured user input. Create, read, update, delete CVs. Profile image upload to Cloudinary. AI-generated summary. Cache service with Redis." },
+      { name: "Portfolio Service", path: "/portfolio", type: "paid", credits: 2, port: "5005", description: "Upload PDF portfolio → extract text → AI analyze → generate full HTML/CSS/JS website. Slug-based public access. Redis caching (1 hour)." },
+      { name: "Mock Interview Service", path: "/mock-interview", type: "mixed", port: "5007", description: "Generate (2 credits) 15 interview questions per batch. DSA (with JavaScript + Python solutions), Technical, Project, Behavioral, HR. PDF stored to Cloudinary. Redis caching." },
+      { name: "Billing Service", path: "/billing", type: "free", port: "5006", description: "Stripe checkout, webhooks, subscription lifecycle. createOrder, getPaymentStatus, getPaymentHistory, admin stats/transactions. Plans: free (10 credits), starter ($3.99/100), pro ($4.99/200)." },
+      { name: "Admin Module", path: "/admin", type: "admin", port: "5000 (Gateway)", description: "System analytics, user management, revenue reports, agent usage stats, plan distribution, activity feed. Protected by protect + isAdmin middleware." },
+    ],
+
+    middleware: [
+      { name: "protect", description: "Verifies JWT from HTTP-only cookie (sessionid), loads session from Redis (session-{sessionid}), attaches req.user with userId, email, name, isAdmin, credits, plan, status." },
+      { name: "isAdmin", description: "Checks req.user.isAdmin === true. Returns 403 Forbidden if not admin. Used on /admin routes." },
+      { name: "checkCredits", description: "Deducts 2 credits atomically for paid routes. Checks req.creditsAlreadyDeducted flag to prevent double deduction. Calls Auth Service /deduct-credits, then syncs Redis session." },
+      { name: "skipCredits", description: "Marker for free routes — no deduction. Just calls next()." },
+      { name: "trackActivity", description: "Redis pipeline: increments user total/daily/weekly/service usage, global service usage, global type count (free/paid), paid requests, credits used, credit history (LPUSH + LTRIM 100)." },
+      { name: "authRateLimit", description: "10 auth attempts per 15 min per user/IP via Redis INCR + EXPIRE. Returns 429 with retryAfter seconds." },
+      { name: "uploadRateLimit", description: "80 requests per hour for upload endpoints via Redis INCR + EXPIRE. Returns 429 with retryAfter seconds." },
+      { name: "ProxyWithHeader", description: "Custom express-http-proxy wrapper injecting x-user-id, x-user-email, x-user-name, x-user-admin headers. Forwards authorization and cookie headers. 30s timeout." },
+      { name: "addUserHeadersToProxy", description: "Injects x-user-id, x-user-email, x-user-name from req.user. Forwards cookie and authorization headers. Handles content-type for multipart." },
+      { name: "shouldParseBody", description: "Returns false for multipart/form-data requests (lets express-http-proxy stream the body), true otherwise." },
+      { name: "corsOptions", description: "Origin: FRONTEND_URL. Credentials: true. Methods: GET/POST/PUT/DELETE/OPTIONS/PATCH. Allowed headers include x-user-id, x-user-email, x-user-name, x-remaining-credits, x-credits-deducted." },
+    ],
+
+    features: [
+      "AI Chat, Web Search (Tavily) & Coding Assistant",
+      "PDF Generation (PDFKit) & PPT Generation (pptxgenjs)",
+      "AI Image Generation (Pollinations + Cloudinary upload)",
+      "AI File Analysis — PDF, DOCX, TXT, images (Gemini Vision)",
+      "RAG with Pinecone — ask questions about uploaded files",
+      "AI Resume Analyzer with ATS Evaluation",
+      "AI CV Generator with structured output + AI summary",
+      "CV → AI Mock Interview (DSA, Technical, Project, Behavioral, HR)",
+      "Mock interview solutions in JavaScript AND Python",
+      "Batch-based interview generation (15 questions per batch)",
+      "CV → AI Portfolio Generator (full HTML/CSS/JS website)",
+      "Job Search Agent (Tavily + 3-day freshness filter)",
+      "Stripe subscription & credit-based usage (2 credits/action)",
+      "Firebase Google Authentication + JWT sessions (7-day cookies)",
+      "Express Gateway with 8 microservices",
+      "Redis caching, rate limiting, activity tracking",
+      "Dockerized deployment with Redis appendonly",
+      "Nginx load balancing",
+      "Admin panel with global analytics & revenue reports",
+      "Agent usage statistics (paid vs free)",
+      "Plan distribution (Free/Starter/Pro)",
+      "User activity tracking (daily/weekly/service-level)",
+      "Credit history with LPUSH/LTRIM (last 100 entries)",
+      "Auth rate limiting (10 attempts / 15 min)",
+      "Upload rate limiting (80 requests / hour)",
+      "Idempotent Stripe payment processing",
+      "SHA-256 resume deduplication",
+      "Soft delete for CVs",
+      "Portfolio public/private toggle",
+      "Slug-based portfolio URLs",
+    ],
+
+    challenges: [
+      "Designing a multi-agent architecture with LangGraph state machines",
+      "Building a unified Express Gateway for 8 independent microservices",
+      "Implementing atomic credit deduction with Redis session sync",
+      "Preventing double-deduction with req.creditsAlreadyDeducted flag",
+      "Redis-backed sliding-window rate limiting (auth + upload)",
+      "Wiring per-user, per-service, and global activity tracking into one Redis pipeline",
+      "Dockerizing services with Redis appendonly persistence",
+      "Handling Stripe webhooks and subscription lifecycle across services",
+      "Integrating multiple AI providers (Groq, Gemini, Tavily, Pinecone)",
+      "Injecting user context safely across proxy boundaries",
+      "Preventing credit loss when downstream service fails after deduction",
+      "Handling multipart/form-data through express-http-proxy",
+      "Building a job search agent with Tavily freshness filtering",
+      "Implementing RAG with Pinecone for file Q&A",
+      "SHA-256 deduplication for resume uploads",
+      "Managing 3 separate AI models (LLaMA 3.3 70B, Qwen Vision, Gemini)",
+      "Building batch-based mock interview generation with previous topic exclusion",
+      "Redis pipeline for high-throughput activity tracking (12+ increments per request)",
+      "Session sync across 8 services via Redis",
+    ],
+
+    learnings: [
+      "Multi-Agent AI with LangChain & LangGraph",
+      "Microservices and API Gateway design",
+      "Redis pipelines for high-throughput metrics",
+      "Rate limiting strategies (sliding window with INCR + EXPIRE)",
+      "Docker & Docker Compose for microservices",
+      "JWT + Firebase hybrid authentication",
+      "Stripe subscription and credit-based billing",
+      "Atomic credit deduction patterns",
+      "express-http-proxy context injection",
+      "Scalable backend architecture patterns",
+      "LangGraph state machines for agent routing",
+      "Groq tool calling for AI agents",
+      "Tavily web search integration",
+      "Pinecone vector database for RAG",
+      "Gemini Vision for image analysis",
+      "PDFKit for PDF generation",
+      "pptxgenjs for PowerPoint generation",
+      "Cloudinary upload_stream for buffer uploads",
+      "Redis session management across services",
+      "Activity tracking with Redis pipelines",
+      "Idempotent payment processing",
+      "SHA-256 hashing for deduplication",
+    ],
+  },
+
+ 
+  // 2. WEBLIX — AI Website Generator
+  {
+    id: "weblix",
+    name: "Weblix",
+    url: "/weblix.png",
+    technologies: [
+      "MERN", "React 19", "Node.js", "Express 5", "MongoDB",
+      "Gemini 2.5 Flash", "Stripe", "Firebase Auth", "Monaco Editor",
+      "Redux Toolkit", "Framer Motion", "Tailwind CSS 4",
+      "Prettier", "Recharts", "Vite",
+    ],
+    description:
+      "AI-powered full-stack website generator built with MERN stack. Create complete websites from simple text prompts, preview in real-time, edit with AI-driven prompts, download source code, and deploy instantly with Stripe payments.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "Weblix is an AI-powered website generator that transforms plain text prompts into fully functional, production-ready websites using Google's Gemini API.",
+          "The platform handles everything from simple landing pages to complex web applications — and even fully playable games — making web development accessible to anyone, regardless of coding experience.",
+          "Built end-to-end as a single MERN application, Weblix is a complete product: prompt → generation → live preview → AI editing → manual editing → save → deploy → public URL. Every stage is polished, integrated, and shipped.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "Intelligent Prompt Understanding",
+        items: [
+          "Context-aware intent detection — games, portfolios, ecommerce, blogs, business sites",
+          "Type-specific system prompts engineered for each website category",
+          "3-retry fallback system with exponential backoff on Gemini API failures",
+          "Automatic image insertion with onerror fallback for 100% load reliability",
+          "Full website generation — HTML, CSS, and JavaScript in a single coherent response",
+          "Smart cleanup of Gemini's markdown-wrapped responses via reliable regex",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "A Full-Featured Code Editor",
+        items: [
+          "Monaco Editor — the same editor that powers VS Code",
+          "Live iframe preview with instant updates as you type",
+          "Prettier code formatting built into the browser (Ctrl+Shift+F)",
+          "Language auto-detection for HTML, CSS, JavaScript, Python, and PHP",
+          "Unsaved change indicators and fullscreen preview mode",
+          "Conversation history persisted alongside every website",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Generation & Deploy Pipeline",
+        paragraphs: [
+          "Prompt → AI Generation (Gemini) → Live Preview → AI Chat Editing → Manual Code Editing → Save → Deploy → Public URL.",
+          "Every website you generate is a first-class object — it has a title, a slug, a conversation history, an analytics record, and a deploy state. You can come back a week later, load it, edit it with AI, and redeploy it. It's a real product, not a toy.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Stripe Billing & Credit Economy",
+        paragraphs: [
+          "Weblix runs on a transparent credit economy. Stripe Checkout powers three tiers — Free (100 credits), Pro ($10 / 500 credits), and Enterprise ($30 / 1000 credits). Each website generation costs 5 credits; each AI edit costs 2 credits.",
+          "Fulfillment is webhook-based and idempotent — credits are added exactly once per Stripe session, verified by session ID. This prevents the classic double-crediting bug that plagues naive Stripe integrations.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "Weblix taught me how to engineer an AI product where the AI is only one part of the system.",
+          "I learned prompt engineering for code generation at production scale — the difference between a prompt that generates a landing page and one that generates a fully playable tic-tac-toe game. I learned Monaco Editor integration, in-browser Prettier formatting, iframe sandboxing for user-generated code, Stripe webhook lifecycle with idempotency, and Firebase Google Auth + JWT hybrid sessions.",
+          "Above all, I learned how to take an AI idea and turn it into a polished, billable, deployable product — with a dashboard, analytics, billing, and a public URL for every artifact.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/Weblix",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791447182/weblix.mp4",
+    category: "AI / Full-Stack",
+    year: "2026",
+    status: "Live",
+    role: "Full-Stack Developer",
+    duration: "3 months",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["React 19", "Vite", "Tailwind CSS 4", "Redux Toolkit", "Framer Motion", "Monaco Editor", "Recharts", "React Router 7"],
+      backend: ["Node.js", "Express 5", "Mongoose", "JWT", "bcryptjs"],
+      ai: ["Google Gemini 2.5 Flash", "@google/genai", "Groq SDK", "Mistral AI"],
+      tooling: ["Prettier", "html2pdf", "JSZip", "Axios", "Cheerio"],
+      infrastructure: ["MongoDB Atlas", "Firebase Auth", "Stripe", "Vercel"],
+    },
+
+    architecture: {
+      title: "Monolithic MERN Architecture — AI Generation at the Core",
+      description:
+        "Classic MERN stack — React SPA, Express server, MongoDB — with Gemini AI as the code generator and Stripe for billing. Single deployment, single codebase, single database. The AI generation pipeline is isolated in a dedicated service layer with type detection, retry logic, and fallback template generation.",
+      layers: [
+        { name: "Client", items: ["React 19 SPA", "Redux Toolkit", "Firebase Google Auth", "Monaco Editor", "Recharts Dashboard"] },
+        { name: "API", items: ["Express 5 Router", "JWT middleware", "Auth | User | Website | Deploy | Billing routes", "Stripe webhook (raw body)"] },
+        { name: "AI Service", items: ["Gemini 2.5 Flash generator", "Website type detector", "3-retry fallback", "Image URL validator"] },
+        { name: "Data", items: ["MongoDB + Mongoose", "User, Website, Message, Analytics schemas"] },
+        { name: "Infrastructure", items: ["Firebase Auth", "Stripe Checkout", "Vercel (frontend)", "Node server (backend)"] },
+      ],
+    },
+
+    servicesLabel: "Application Modules",
+    middlewareLabel: "Server Middleware",
+
+    services: [
+      { name: "Auth Module", path: "/api/auth", type: "free", description: "Firebase Google login, JWT issuance as HTTP-only cookie, logout, current-user, credits fetch." },
+      { name: "User Module", path: "/api/user", type: "free", description: "Current user profile with JWT validation." },
+      { name: "Website Module", path: "/api/website", type: "mixed", description: "Generate (5 credits), update with AI (2 credits), save, fetch, dashboard stats, analytics." },
+      { name: "Deploy Module", path: "/api/websitedeploy", type: "free", description: "Deploy to public slug URL, undeploy, fetch by slug, list all deployed." },
+      { name: "Billing Module", path: "/api/billing", type: "free", description: "Stripe Checkout session, payment confirmation, credits retrieval." },
+      { name: "Webhook Module", path: "/webhook/stripe", type: "free", description: "Stripe webhook — idempotently credits user account using session ID." },
+    ],
+
+    middleware: [
+      { name: "Auth", description: "Verifies JWT from HTTP-only cookie, attaches req.user from MongoDB." },
+      { name: "Firebase Auth Handler", description: "signInWithPopup → Firebase ID token → JWT cookie issued." },
+      { name: "cors", description: "Configured with FRONTEND_URL origin + credentials:true." },
+      { name: "cookie-parser", description: "Parses JWT token cookie on every request." },
+      { name: "express.raw (webhook only)", description: "Raw body parser for Stripe webhook signature verification." },
+      { name: "Credit Deduction (inline)", description: "Generation deducts 5 credits; AI updates deduct 2 credits. Insufficient → 402." },
+    ],
+
+    features: [
+      "AI-powered website generation from natural language prompts",
+      "Smart intent detection — games, portfolios, ecommerce, blogs, business",
+      "Gemini 2.5 Flash with 3-retry fallback system",
+      "Reliable image injection with onerror fallback",
+      "Monaco Editor with VS Code-grade editing experience",
+      "Prettier code formatting (HTML, CSS, JS) with Ctrl+Shift+F",
+      "Live iframe preview with instant updates",
+      "Fullscreen preview mode",
+      "AI chat editing — modify website by describing changes",
+      "Complete code download as standalone HTML file",
+      "One-click deploy to public slug URL",
+      "Firebase Google login + JWT HTTP-only cookie sessions",
+      "Stripe Checkout with 3 pricing tiers (Free, Pro, Enterprise)",
+      "Stripe webhook-based fulfillment with idempotency",
+      "Credit-based usage: 5 credits per generate, 2 per edit",
+      "Interactive dashboard with Recharts pie chart",
+      "Website type auto-tagging and update",
+      "Full deployment lifecycle (deploy, undeploy, public view)",
+    ],
+
+    challenges: [
+      "Building type detection so 'tic tac toe' actually builds a playable game",
+      "Handling Gemini's markdown-wrapped responses with reliable cleanup regex",
+      "Ensuring 100% of AI-generated images load by injecting onerror fallbacks",
+      "Implementing 3-retry logic with exponential backoff on Gemini failures",
+      "Designing a fallback HTML template generator for when Gemini fails",
+      "Atomically deducting credits only after successful generation",
+      "Preventing double-crediting on Stripe webhook retries using session.id",
+      "Monaco Editor integration with dynamic language detection",
+      "Integrating Prettier in the browser with correct plugins",
+      "Sandboxing the iframe preview to allow scripts but prevent risks",
+      "Persisting conversation history with each website",
+      "Serving public deployed sites via slug without authentication",
+    ],
+
+    learnings: [
+      "Prompt engineering for code generation with Gemini 2.5 Flash",
+      "MERN stack architecture with clean controller/service separation",
+      "Firebase Google Auth + custom JWT hybrid authentication",
+      "HTTP-only cookie sessions with cross-origin CORS credentials",
+      "Stripe Checkout + webhook signature verification + idempotency",
+      "Credit-based billing with conditional deduction logic",
+      "Monaco Editor embedding and language auto-detection",
+      "In-browser Prettier formatting for HTML/CSS/JS",
+      "Iframe sandboxing strategies for user-generated code preview",
+      "Dashboard analytics with Recharts",
+      "Public slug-based routing for deployed user sites",
+      "Fallback template generation for unreliable AI responses",
+      "End-to-end product building from prompt to deployment",
+    ],
+  },
+
+  
+
+ 
+  // 3. SIRAJBOOK — Real-Time Social Media Platform  
+  {
+    id: "sirajbook",
+    name: "SirajBook",
+    url: "/sirajbook.png",
+    technologies: [
+      "MERN", "React 19", "Node.js", "Express 5", "MongoDB",
+      "Socket.io", "Cloudinary", "JWT", "bcrypt", "Tailwind CSS",
+      "Redux Toolkit", "Multer", "Nodemailer", "Lucide React",
+    ],
+    description:
+      "Modern social media platform built using the MERN stack with an Instagram-like interface. Share posts, reels and stories, chat in real time via Socket.io, follow people, and get live notifications — with Cloudinary media handling and JWT auth.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "SirajBook is a full-featured social media platform inspired by Instagram's intuitive interface — built from scratch with the MERN stack and a real-time layer powered by Socket.io.",
+          "The platform delivers the entire social experience: photo and video posts, reels, 24-hour stories, one-to-one messaging with typing indicators, follow/unfollow, live notifications, and full profile customization.",
+          "Under the hood, it combines JWT authentication with bcrypt password hashing, Cloudinary for media handling, MongoDB TTL indexes for ephemeral content, and a Socket.io server managing online presence, chat rooms, and real-time events.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "Real-Time Communication",
+        items: [
+          "Socket.io server — live messages, typing indicators, online/offline presence",
+          "One-to-one chat with image attachments via Cloudinary",
+          "Conversation auto-deduplication using findOrCreate with sorted participants",
+          "In-app notifications — follows, likes, comments, messages",
+          "Live notification feed with unread badge counter",
+          "Graceful shutdown handling — online status cleared on SIGINT",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Complete Content Creation Suite",
+        items: [
+          "Posts — image/video uploads with captions, likes, comments, saves",
+          "Reels — short video format with dedicated feed",
+          "Stories — 24-hour ephemeral content with viewer tracking (TTL index)",
+          "AI Image Generator — text-to-image via Pollinations AI",
+          "Profile customization — name, username, bio, profession, gender, location, website, avatar",
+          "Email OTP flow — signup verification and password reset",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete User Journey",
+        paragraphs: [
+          "Signup → Email OTP Verification → Forgot Password Reset → Profile Setup → Post / Reel / Story → Follow & Notify → Real-time Chat → Bookmark & Discover.",
+          "Every interaction is designed to feel instant. Likes, comments, and follows trigger live notifications. Messages appear in real time via Socket.io rooms. Stories expire automatically after 24 hours thanks to MongoDB TTL indexes.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Authentication, Security & Recovery",
+        paragraphs: [
+          "JWT HTTP-only cookie sessions with 1-year expiry, bcrypt password hashing with 10 salt rounds, Nodemailer email delivery for the OTP flow (4-digit codes, 5-minute expiry), and a complete forgot-password workflow.",
+          "Multer memory storage handles uploads up to 200MB without touching disk — files stream directly to Cloudinary via upload_stream. This keeps the server lean and prevents disk-space exhaustion under load.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "SirajBook taught me how to build real-time systems with WebSockets — the kind of architecture that powers WhatsApp, Slack, and Discord.",
+          "I learned Socket.io rooms for conversation isolation, presence tracking with in-memory Maps, broadcasting to both rooms and specific sockets, MongoDB TTL indexes for ephemeral content, Multer memoryStorage with Cloudinary upload_stream, conversation deduplication via sorted-participant canonicalization, and Nodemailer OTP workflows.",
+          "Above all, I learned that real-time features require a completely different mindset — you have to think about connection state, reconnection logic, graceful shutdown, and the subtle race conditions that only appear when multiple users act at once.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/sirajbook",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791447268/sirajbook.mp4",
+    category: "Social Media",
+    year: "2025",
+    status: "Live",
+    role: "Full-Stack Developer",
+    duration: "2 months",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["React 19", "Vite", "Tailwind CSS", "Redux Toolkit", "React Router 7", "Socket.io Client", "Lucide React"],
+      backend: ["Node.js", "Express 5", "Mongoose", "JWT", "bcrypt", "Multer", "Nodemailer", "Socket.io"],
+      ai: ["Pollinations AI (text-to-image)", "@google/generative-ai"],
+      media: ["Cloudinary (upload_stream)", "Memory storage (Multer)"],
+      infrastructure: ["MongoDB Atlas", "JWT sessions", "Gmail SMTP (OTP)"],
+    },
+
+    architecture: {
+      title: "Monolithic MERN + Real-Time Architecture",
+      description:
+        "Single Express server hosting all routes — auth, posts, reels, stories, messages, notifications — with Socket.io for real-time events and MongoDB as the single source of truth. Media uploads bypass disk entirely via Multer memoryStorage → Cloudinary upload_stream.",
+      layers: [
+        { name: "Client", items: ["React 19 SPA", "Redux Toolkit", "React Router 7", "Socket.io Client"] },
+        { name: "API", items: ["Express 5 server", "JWT isauth middleware", "Auth | User | Post | Reels | Story | Message | Admin routes", "Multer memory uploads"] },
+        { name: "Real-Time", items: ["Socket.io server", "user_online/offline events", "join_conversation rooms", "typing_start/stop", "receive_message"] },
+        { name: "Data", items: ["MongoDB + Mongoose", "Users, Posts, Reels, Stories, Conversations, Messages, Notifications", "TTL index on Stories"] },
+        { name: "External", items: ["Cloudinary (media CDN)", "Gmail SMTP (OTP)", "Pollinations AI (image generation)"] },
+      ],
+    },
+
+    servicesLabel: "Core Modules",
+    middlewareLabel: "Express Middleware",
+
+    services: [
+      { name: "Auth Module", path: "/api", type: "free", description: "Signup (bcrypt + JWT), signin, signout, OTP send/verify, password reset." },
+      { name: "User Module", path: "/api", type: "free", description: "Current user, profile by username, suggested users, follow/unfollow, edit profile, user search, follow stats." },
+      { name: "Post Module", path: "/api", type: "free", description: "Upload post (image/video), get all posts, like/unlike, comment, save/unsave." },
+      { name: "Reels Module", path: "/api", type: "free", description: "Upload reels, all reels feed, like/unlike, comment, save/unsave." },
+      { name: "Story Module", path: "/api", type: "free", description: "Upload story (24h auto-delete), view story, get stories by user, delete story." },
+      { name: "Message Module", path: "/api", type: "free", description: "Send message (text or image), get all messages, previous chats list." },
+      { name: "Notification Module", path: "/api", type: "free", description: "Follow/like/comment notifications, mark read, delete, clear all." },
+      { name: "Admin Module", path: "/api/admin", type: "admin", description: "Admin-only cleanup of conversations (duplicate removal)." },
+    ],
+
+    middleware: [
+      { name: "isauth", description: "Verifies JWT from HTTP-only cookie. Attaches req.userid." },
+      { name: "isAdmin", description: "Role guard — only users with role 'admin'." },
+      { name: "upload (Multer)", description: "Memory storage for images/videos. 200MB limit. Image/video mimetypes only." },
+      { name: "checkFileSize", description: "Extra guard — rejects uploads above 200MB." },
+      { name: "cookie-parser", description: "Parses JWT token from cookies." },
+      { name: "CORS", description: "Locked to http://localhost:5173 with credentials:true." },
+    ],
+
+    features: [
+      "Instagram-style feed with photos and videos",
+      "Real-time messaging with Socket.io (typing, online status)",
+      "Image attachments in chat via Cloudinary",
+      "Reels — short video format with dedicated feed",
+      "Stories — 24-hour ephemeral content with TTL index",
+      "Story viewer tracking (who viewed your story)",
+      "Post likes, comments, and bookmarks",
+      "Reel likes, comments, and saves",
+      "Follow / unfollow system with notification",
+      "Suggested users based on who you don't follow",
+      "User search with regex across name/username/bio/profession",
+      "Live notification feed with unread badge",
+      "Notification types: follow, like, comment, message",
+      "Edit profile with avatar upload to Cloudinary",
+      "Bio, profession, gender, location, website fields",
+      "Email OTP flow — signup verification and password reset",
+      "bcrypt password hashing (10 rounds)",
+      "JWT HTTP-only cookie sessions (1-year expiry)",
+      "Auto-cleanup of duplicate conversations on server start",
+      "AI Image Generator via Pollinations AI",
+      "Fully responsive mobile + desktop layouts",
+    ],
+
+    challenges: [
+      "Building real-time messaging with Socket.io — rooms, presence, typing indicators",
+      "Preventing duplicate conversations with sorted-participant canonicalization",
+      "Handling Cloudinary uploads with memory storage instead of disk",
+      "Writing a robust findOrCreate that handles race conditions",
+      "Implementing MongoDB TTL index for automatic 24-hour story expiry",
+      "Chaining OTP send → verify → reset-password flow securely",
+      "Uploading 200MB video reels without blocking the event loop",
+      "Broadcasting messages to both room members and receiver's personal socket",
+      "Updating online/offline status on socket connect and server SIGINT",
+      "Keeping notifications in sync between polling and instant socket events",
+      "Designing separate feeds for posts, reels, and stories",
+      "Writing auto-cleanup routines that run on server startup",
+    ],
+
+    learnings: [
+      "Real-time WebSocket architecture with Socket.io rooms",
+      "Cloudinary buffer-based uploads via upload_stream",
+      "Multer memoryStorage for in-memory file handling",
+      "MongoDB TTL indexes for ephemeral content (stories)",
+      "Mongoose static methods for domain logic (findOrCreate)",
+      "Pre-save hooks for data normalization",
+      "bcrypt password hashing and JWT session management",
+      "HTTP-only cookie authentication across CORS origins",
+      "Nodemailer SMTP for transactional email (OTP)",
+      "Regex-based search across multiple fields",
+      "Socket.io presence tracking with in-memory Maps",
+      "Broadcasting to rooms vs. specific sockets",
+      "Graceful shutdown handling for online status cleanup",
+      "React Redux Toolkit for global auth state",
+      "Pollinations AI for keyless image generation",
+    ],
+  },
+
+ 
+  // 4. REVOLTEVEZ — Electric Scooter E-Commerce + AI
+  {
+    id: "revoltevez",
+    name: "Revoltevez",
+    url: "/revoltevez.png",
+    technologies: [
+      "MERN", "React 19", "Redux Toolkit", "Vite", "Tailwind CSS",
+      "Node.js", "Express 5", "MongoDB", "Mongoose", "Clerk Auth",
+      "JWT", "LangChain", "Groq AI", "Cloudinary", "Multer",
+      "React Router 7", "React Markdown", "Zod",
+    ],
+    description:
+      "Modern electric scooter e-commerce platform built with MERN stack and Clerk authentication. Features a product showcase, WhatsApp-integrated booking system, AI chatbot with 4-key rotation, verified-access product/story pages, admin dashboard, and customer feedback moderation.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "Revoltevez is a production-grade e-commerce platform for electric scooters and bikes, built for a real Lahore-based company. It's not a demo — it's a business tool that handles real customers, real bookings, and real feedback.",
+          "Built with React 19, Node.js, Express 5, MongoDB, and Clerk Authentication, the platform combines a public product showcase with a verified-access experience — product details, story content, and the AI chatbot are available only to signed-in users.",
+          "Behind the storefront sits a comprehensive admin panel that gives company staff complete control over products, stories, feedback, bookings, and users — all secured with role-based access control.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "AI Shopping Assistant (Groq + LangChain)",
+        items: [
+          "Groq-powered AI using openai/gpt-oss-120b model",
+          "Four-key API rotation with automatic failover and cooldown-based recovery",
+          "Tool calling — the AI answers questions using real MongoDB product data",
+          "Per-user conversational memory retaining the last 10 messages",
+          "Roman Urdu + English language support with auto-detection",
+          "Fallback responses and WhatsApp CTA when all API keys are rate-limited",
+          "Session isolation (userId::sessionId) prevents cross-user data leaks",
+          "Chat memory automatically cleared on logout for privacy",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Product Showcase & Booking System",
+        items: [
+          "All Products page with grid layout and live search",
+          "Price filters (PKR 100K–300K and above 300K)",
+          "Availability filters + sorting (Newest, Price Low-High, Price High-Low, Name A-Z)",
+          "Mobile-friendly filter drawer",
+          "Product detail page (login required) with full specifications",
+          "Overview / Specifications / Warranty tabs",
+          "Book Now button with booking modal",
+          "Direct WhatsApp contact integration",
+          "Auto-incrementing product view counters",
+          "Related products navigation",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete Customer Journey",
+        paragraphs: [
+          "Visit → Browse Products (public grid) → Click Product → Login Prompt → Sign In (Google or Email OTP) → Product Detail Opens → Book Now → Fill Form → WhatsApp Notification → AI Chat → Submit Feedback → Admin Approves → Public Display.",
+          "Every step is deliberate. Visitors can browse the showcase without signing in — but the moment they want details, they're guided through a smooth Clerk-powered authentication flow. The AI assistant is available to answer questions in both English and Roman Urdu — the exact mix that Pakistani customers use.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Feedback & Stories Platform",
+        paragraphs: [
+          "One feedback submission per account — enforced by a unique email index at the database level, so it's impossible to spam. Star ratings 1–5 with hover effects, optional role fields, and a 500-character message limit. Name and email are auto-populated from Clerk. Feedback stays pending until admin approval.",
+          "The Stories platform publishes long-form articles about electric vehicles with a reading progress bar, featured hero layout, category badges, estimated reading time, copy link, and WhatsApp share. It's a content marketing engine built into the e-commerce platform.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "Revoltevez taught me how to build a real business tool — one that runs in production, serves real customers, and requires real engineering care.",
+          "I learned multi-layer authentication (Clerk + JWT HTTP-only cookies + Bearer token fallback with a priority order), a 4-key AI rotation system with cooldown-based failover, LangChain tool calling against real MongoDB queries, per-user conversational memory isolation, Clerk Google OAuth + Email OTP flows, Cloudinary image management with automatic old-image cleanup, role-based access control with frontend route guards + backend middleware, and Zod validation.",
+          "Above all, I learned that a production e-commerce platform is 10% storefront and 90% operations — admin tools, moderation workflows, feedback pipelines, WhatsApp integration, and resilient AI infrastructure.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/Revoltevez",
+    demoLink: "https://res.cloudinary.com/dcpxgn271/video/upload/v1791454420/IMG_20261008_150300_760.mp4",
+    category: "E-Commerce / AI",
+    year: "2026",
+    status: "Live",
+    role: "Full-Stack Engineer",
+    duration: "3 months",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["React 19.2.8", "Vite 8.3.0", "Redux Toolkit 2.13.0", "React Router DOM 7.18.4", "Tailwind CSS 4.3.3", "Clerk React 5.61.10", "Axios 1.20.0", "React Markdown 10.1.0", "React Toastify 11.1.0"],
+      backend: ["Node.js", "Express 5.2.1", "Mongoose 9.10.3", "Clerk Express 2.1.74", "JWT 9.0.3", "cookie-parser 1.4.7", "Multer 2.4.0", "multer-storage-cloudinary 4.0.0", "Cloudinary 1.41.3", "Zod 4.6.5"],
+      ai: ["LangChain Core 1.2.14", "LangChain Groq 1.3.1", "Groq openai/gpt-oss-120b", "Four-key rotation system", "Tool calling + per-user memory"],
+      infrastructure: ["MongoDB Atlas", "Cloudinary CDN", "Clerk (authentication)", "Vercel (frontend)", "Render/Railway (backend)", "Groq (AI inference)"],
+    },
+
+    architecture: {
+      title: "MERN + Clerk + LangChain AI Architecture",
+      description:
+        "React 19 SPA with Redux Toolkit on frontend, Express 5 REST API with JWT cookie sessions + Clerk authentication, MongoDB Atlas with Mongoose, and a LangChain-powered AI service with 4-key Groq rotation, tool calling, and per-user memory isolation.",
+      layers: [
+        { name: "Client", items: ["React 19 + Vite 8", "Redux Toolkit slices", "React Router DOM 7 with ProtectedRoute + AdminRoute", "Tailwind CSS 4", "React Markdown + Remark GFM"] },
+        { name: "Authentication", items: ["Clerk (Google OAuth + Email OTP)", "JWT in HTTP-only cookie (7-day)", "Clerk Bearer token fallback", "Priority: Bearer > Cookie > Clerk"] },
+        { name: "API", items: ["Express 5 server", "Auth | User | Products | Stories | Feedback | Bookings | AI Chat routes", "authenticate + requireRole middleware", "Multer + multer-storage-cloudinary uploads", "Centralized error handler"] },
+        { name: "AI", items: ["groqRotator — 4-key rotation with cooldown", "groqChat — LangChain agent loop", "chatTools — 5 tools", "Per-user memory (userId::sessionId, last 10)", "Auto language detection (English + Roman Urdu)"] },
+        { name: "Data", items: ["MongoDB Atlas + Mongoose 9", "User | Product | Story | Feedback | Booking collections", "Unique email index on Feedback (one per account)", "Indexed clerkId and email on User"] },
+        { name: "Media & External", items: ["Cloudinary (image hosting + CDN)", "Multer (5MB limit, image/* only)", "Auto-delete old images on update/delete", "WhatsApp (wa.me integration)"] },
+      ],
+    },
+
+    servicesLabel: "Core Modules",
+    middlewareLabel: "Express Middleware",
+
+    services: [
+      { name: "Auth Module", path: "/api/auth", type: "free", description: "POST /session (Clerk → JWT), GET /me, POST /logout, POST /refresh. Multi-layer auth with 7-day HTTP-only cookie." },
+      { name: "User Module", path: "/api/user", type: "free", description: "GET /me, PUT /me, DELETE /me, GET /dashboard, GET /all (admin), GET /admin/stats, PUT /:id/role (admin), DELETE /:id (admin)." },
+      { name: "Products Module", path: "/api/products", type: "free", description: "GET / (public list), GET /:id (public — increments views). Admin: POST, PUT, DELETE via /api/admin/products." },
+      { name: "Stories Module", path: "/api/stories", type: "mixed", description: "GET / (public), GET /:id (public — increments views), GET /admin/all (admin), POST/PUT/DELETE (admin, multipart)." },
+      { name: "Feedback Module", path: "/api/feedback", type: "free", description: "POST / (public), GET / (approved only), GET /mine?email= (check submission). Admin: GET all, PUT /:id/status, PUT /:id/reply, DELETE /:id." },
+      { name: "Bookings Module", path: "/api/bookings", type: "mixed", description: "POST /bookings (public create). Admin: GET /admin/bookings, PUT /admin/bookings/:id/status, DELETE /admin/bookings/:id." },
+      { name: "AI Chat Module", path: "/api/chat", type: "free", description: "POST /chat (login required — Groq 4-key rotation), DELETE /chat/:sessionId, GET /chat/keys-stats (admin), POST /chat/reset-keys (admin)." },
+    ],
+
+    middleware: [
+      { name: "authenticate", description: "Verifies JWT or Clerk tokens. Priority: Bearer Token > Cookie > Clerk. Attaches req.user on success." },
+      { name: "requireRole()", description: "Role-based access control — blocks non-admin users with HTTP 403. Normalizes roles via lowercase + trim." },
+      { name: "clerkAuth", description: "Clerk Express middleware — attaches Clerk session to req for fallback authentication." },
+      { name: "jwtAuth", description: "Verifies JWT from HTTP-only cookie. Used as primary session authentication after Clerk login." },
+      { name: "upload", description: "Multer + multer-storage-cloudinary — 5MB file size limit, image/* only filter. Streams directly to Cloudinary." },
+      { name: "uploadStory", description: "Separate Multer instance for story cover images with same 5MB limit + image-only filter." },
+      { name: "errorHandler", description: "Centralized error handler — Mongoose validation → 400, duplicate-key → 409, JWT errors → 401, generic → 500." },
+    ],
+
+    features: [
+      "Clerk authentication (Google OAuth + Email OTP)",
+      "JWT session in HTTP-only cookie (7-day expiry)",
+      "Bearer token fallback for mobile/API clients",
+      "Three-tier auth priority: Bearer > Cookie > Clerk",
+      "Role-based access control (user / admin)",
+      "Frontend route guards (ProtectedRoute + AdminRoute)",
+      "Backend middleware (authenticate + requireRole)",
+      "Product showcase with grid, search, filters, sorting",
+      "Mobile-friendly filter drawer",
+      "Product detail page (login required) with tabs",
+      "Booking modal integrated with WhatsApp",
+      "Auto-incrementing product view counters",
+      "Stories platform with reading progress bar",
+      "Featured story hero layout + category badges",
+      "Estimated reading time + date formatting",
+      "Copy link + WhatsApp share for stories",
+      "One feedback per account (unique email index)",
+      "Star rating 1-5 with hover effects",
+      "Admin feedback moderation (pending / approved / rejected)",
+      "Admin reply to customer feedback",
+      "Google profile avatars + auth provider badges",
+      "AI assistant with Groq 4-key rotation",
+      "LangChain tool calling with real product data",
+      "5 AI tools (list products, search, details, catalog, company info)",
+      "Per-user conversational memory (last 10 messages)",
+      "Roman Urdu + English with auto-detection",
+      "WhatsApp CTA fallback when all AI keys are busy",
+      "Session isolation (userId::sessionId)",
+      "Chat memory auto-cleared on logout",
+      "Admin dashboard with user stats",
+      "Product management (CRUD + Cloudinary + status toggle)",
+      "Story management (CRUD + featured + status)",
+      "Booking management (status workflow + WhatsApp quick links)",
+      "User management (promote / demote / delete)",
+      "AI API key diagnostics panel",
+      "Unified Loader component",
+      "React Toastify notifications",
+      "Cloudinary image cleanup on update/delete",
+      "404 page with light theme",
+      "Mobile responsive across all breakpoints",
+    ],
+
+    challenges: [
+      "Building a 4-key AI rotation system with cooldown-based failover",
+      "Implementing tool calling with LangChain so the AI answers from real MongoDB data",
+      "Isolating per-user conversation memory without leaking between sessions",
+      "Setting up Clerk + JWT + Bearer token in a 3-layer auth priority",
+      "Enforcing one-feedback-per-account with a unique email index",
+      "Handling WhatsApp integration for bookings and AI fallback",
+      "Managing Cloudinary image cleanup on product/story update + delete",
+      "Building a story reading progress bar without a library",
+      "Auto-detecting English vs Roman Urdu in AI responses",
+      "Keeping the AI assistant responsive when all API keys are rate-limited",
+      "Implementing role normalization (lowercase + trim) to prevent RBAC bypass",
+      "Auto-incrementing product and story view counters without race conditions",
+      "Building the admin booking status workflow",
+      "Preventing duplicate feedback submissions at the database level",
+      "Centralized error handling across Clerk / JWT / Mongoose / Zod errors",
+      "Reducing code duplication with a unified Loader component",
+    ],
+
+    learnings: [
+      "Clerk authentication (Google OAuth + Email OTP)",
+      "Multi-layer auth: Clerk + JWT cookie + Bearer fallback",
+      "Priority-based authentication (Bearer > Cookie > Clerk)",
+      "Role-based access control with frontend + backend guards",
+      "LangChain Core + LangChain Groq integration",
+      "Groq openai/gpt-oss-120b model for AI inference",
+      "Four-key API rotation with rate-limit + auth-error cooldowns",
+      "Tool calling to query MongoDB from an LLM",
+      "Per-user conversational memory with session isolation",
+      "Multi-language AI (English + Roman Urdu auto-detection)",
+      "Graceful AI fallback with WhatsApp CTA",
+      "React 19 + Vite 8 frontend",
+      "Redux Toolkit 2 slices",
+      "React Router DOM 7 with ProtectedRoute + AdminRoute",
+      "Tailwind CSS 4 design system",
+      "React Markdown + Remark GFM for AI responses",
+      "React Toastify for notifications",
+      "Multer + multer-storage-cloudinary for direct uploads",
+      "Cloudinary image cleanup on update/delete",
+      "MongoDB + Mongoose 9 schema design",
+      "Zod 4.6.5 for input validation",
+      "Express 5 middleware architecture",
+      "Building a full e-commerce platform with AI",
+    ],
+  },
+
+  
+  // 5. SAVIPULSE — AI Health Assistant Platform
+{
+  id: "healthmodel",
+  name: "SaviPulse",
+  url: "/healthmodel.png",
+  technologies: [
+    "React 19", "Vite", "Supabase", "Supabase Auth", "Supabase Storage",
+    "Supabase Edge Functions", "PostgreSQL", "@supabase/supabase-js",
+    "Lucide React", "marked", "React Router 7", "Tailwind CSS",
+    "AI Chat", "AI Vision", "Tavily", "localStorage", "JWT (Supabase sessions)",
+  ],
+  description:
+    "AI-powered health assistant platform built with React 19, Vite, and Supabase. Users can track vitals, upload medical records for AI analysis, chat with an AI doctor, read real-time health news, publish community blogs, and get personalized insights — all powered by Supabase Edge Functions, AI chat/vision, and Tavily.",
+
+  descriptionSections: [
+    {
+      icon: "intro",
+      paragraphs: [
+        "SaviPulse is a full-stack AI health assistant designed to make healthcare awareness part of everyday life — built with React 19, Vite, and Supabase.",
+        "The platform combines conversational AI, AI vision for medical documents, live web intelligence for health news, a full blog system, and personalized health analytics into a single fast, modern single-page application.",
+        "Every AI feature runs through Supabase Edge Functions with carefully engineered prompts, emergency red-flag detection, caching, and safe fallbacks — because in healthcare, safety and reliability matter more than cleverness.",
+      ],
+    },
+    {
+      icon: "robot",
+      heading: "AI Doctor & Conversational Health",
+      items: [
+        "AI Chat — Contextual medical conversations powered by the chat-ai Edge Function",
+        "Red-Flag Detection — Rule-based emergency detection that runs before every AI call",
+        "Instant emergency message when life-threatening symptoms are detected (chest pain, stroke, suicidal ideation)",
+        "Smart Chat Titles — Auto-generated titles from the first user message",
+        "Chat History — Persistent conversations stored per user in Supabase PostgreSQL",
+        "React 19 chat UI with markdown rendering (marked), copy, reactions, retry, and pinned conversations",
+        "Full conversation CRUD — rename, pin, delete, clear, search, quick-question starters",
+        "Ctrl+K to focus input, Ctrl+N for a new conversation",
+      ],
+    },
+    {
+      icon: "briefcase",
+      heading: "Medical Records & AI Vision Analysis",
+      items: [
+        "Upload prescriptions, lab reports, X-rays, scans, and doctor notes to Supabase Storage",
+        "AI Vision Analysis — analyze-record Edge Function reads documents and returns structured JSON",
+        "Summary in both English AND Roman Urdu",
+        "Auto-analyze on image upload (background, non-blocking)",
+        "AI badge on analyzed records + full analysis modal rendered in React",
+        "Structured output — medicines, tests, advice, warnings, follow-up date",
+        "Signed URL + base64 conversion pipeline for reliable AI image access",
+        "Robust path resolution (extractStoragePath / findRealPathInBucket) when URLs are not directly fetchable",
+      ],
+    },
+    {
+      icon: "pipeline",
+      heading: "The Complete Health Journey",
+      paragraphs: [
+        "Sign up → Update daily vitals → Chat with AI Doctor → Upload prescription → AI analyzes → Get personalized insights → Read daily health news → Track trends over 7/30 days → Reach emergency help via red-flag detection.",
+        "Every part of the platform feeds the next. Vitals power the health score. Health score powers the AI insights. Uploaded records power the medical analysis. The AI doctor knows the user's context and answers accordingly.",
+      ],
+    },
+    {
+      icon: "creditCard",
+      heading: "Health Tracking, Daily Care & Analytics",
+      paragraphs: [
+        "Daily vitals — Heart Rate, Sleep, Steps, Calories, Water, Weight, Mood, Blood Pressure. A health score is computed from 5 weighted factors with color-coded labels. There's a 7-day trend chart, 30-day history, and a BMI calculator with a visual scale and category.",
+        "The Daily Care page generates a personalized care plan from your vitals — action items, suggestions, and wins, plus a 4-slot daily routine (Morning / Midday / Evening / Night). It also tracks logging streak and vitals completeness.",
+        "The Insights page aggregates 30-day stats, AI-style personalized tips, live health news, trending topics, and nutrition insights — all computed client-side and cached through the Edge Function layer.",
+      ],
+    },
+    {
+      icon: "rocket",
+      heading: "News, Blogs, Reviews & Admin",
+      paragraphs: [
+        "Real-time health news via the health-news Edge Function (Tavily web search) with 6-hour caching. Articles are auto-categorized with domain icons, searchable, bookmarkable (localStorage), and viewable in grid or list mode.",
+        "A full Blog system lets admins publish, edit, and delete posts with cover images uploaded to Supabase Storage — users can like and comment on blogs. Blogs are listed with author profiles, likes count, comments count, and view counter.",
+        "The community review system has a full admin approval workflow — reviews go through pending → approved → rejected states with a featured toggle and moderation panel.",
+        "An admin dashboard shows platform-wide stats, user role management (promote/demote), and review/blog moderation.",
+      ],
+    },
+    {
+      icon: "rocket",
+      heading: "What I Learned",
+      paragraphs: [
+        "SaviPulse taught me how to build AI for a domain where safety is non-negotiable — healthcare.",
+        "I learned React 19 with hooks (useState, useEffect, useMemo, useCallback, useRef), Vite for fast builds, Supabase Auth with session listeners, Supabase PostgreSQL with upserts and row-level access, Supabase Storage for records, avatars, and blog covers, Supabase Edge Functions for AI (chat-ai, health-news, analyze-record), prompt engineering for medical safety, rule-based red-flag detection layered on top of LLMs, base64 image pipelines for vision models, reusable ConfirmModal patterns, localStorage bookmarks and pending chat questions, and cascading account deletion.",
+        "Above all, I learned that a production AI product in healthcare needs guardrails — red-flag detection, disclaimers, structured output validation, and caching to avoid stale data.",
+      ],
+    },
+  ],
+
+  githubLink: "https://github.com/SirajAbid17/Healthmodel",
+  demoLink: "https://res.cloudinary.com/dcpxgn271/video/upload/v1791451924/healthmodel.mp4",
+  category: "AI / Health Tech",
+  year: "2026",
+  status: "Live",
+  role: "Full-Stack Developer",
+  duration: "3 months",
+  team: "Solo Project",
+
+  techStack: {
+    frontend: [
+      "React 19 (hooks: useState, useEffect, useMemo, useCallback, useRef)",
+      "Vite 8",
+      "React Router 7",
+      "Lucide React icons",
+      "marked (markdown rendering)",
+      "Custom CSS design system",
+    ],
+    backend: [
+      "Supabase (PostgreSQL + Auth + Storage + Edge Functions)",
+      "Supabase Auth (session listeners, JWT, password change)",
+      "Supabase Storage (records, avatars, blogs buckets)",
+      "Supabase Edge Functions (chat-ai, health-news, analyze-record)",
+    ],
+    ai: [
+      "AI Chat (chat-ai Edge Function)",
+      "AI Vision (analyze-record Edge Function)",
+      "Tavily web search (health-news Edge Function)",
+      "Prompt engineering for safe medical responses",
+    ],
+    database: [
+      "Supabase PostgreSQL",
+      "profiles, vitals, conversations, conversation_messages",
+      "medical_records, reviews, blogs, blog_likes, blog_comments",
+      "Row-level access via Supabase policies",
+    ],
+    infrastructure: [
+      "Vite build",
+      "Supabase-hosted backend",
+      "Supabase Storage buckets (records, avatars, blogs)",
+      "localStorage (bookmarks, pending chat questions)",
+      "Environment variables (.env: VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY)",
+    ],
+  },
+
+  architecture: {
+    title: "React + Vite SPA with Supabase Backend",
+    description:
+      "Client-side React 19 SPA (Vite) talking directly to Supabase for auth, data, and storage. AI features run through Supabase Edge Functions (chat-ai, health-news, analyze-record) so API keys stay server-side. Auth state is managed with a single onAuthStateChange listener that keeps the session and profile in sync.",
+    layers: [
+      {
+        name: "View (React)",
+        items: [
+          "AuthScreen, Dashboard shell, ChatPage, HealthPage",
+          "DailyCarePage, InsightsPage, RecordsPage, NewsPage",
+          "SettingsPage, AdminPage, Blogs component",
+          "ConfirmModal, HelpScannerModal shared modals",
+        ],
+      },
+      {
+        name: "Client Logic (lib/supabase.js)",
+        items: [
+          "Supabase client + all data helpers (CRUD)",
+          "callChatAI, callHealthNews, callTrendingTopics, callNutritionInsights",
+          "callAnalyzeRecord (signed URL → data URL → Edge Function)",
+          "uploadRecord, uploadAvatar, createBlog, listBlogs, reviews, admin helpers",
+        ],
+      },
+      {
+        name: "Backend (Supabase)",
+        items: [
+          "Auth (email/password, session, password update)",
+          "PostgreSQL tables + policies",
+          "Storage buckets: records, avatars, blogs",
+          "Edge Functions: chat-ai, health-news, analyze-record",
+        ],
+      },
+      {
+        name: "AI & External",
+        items: [
+          "chat-ai → AI Doctor conversations",
+          "analyze-record → AI Vision for medical documents",
+          "health-news → Tavily real-time health news + caches",
+        ],
+      },
+    ],
+  },
+
+  servicesLabel: "Core Pages & Modules",
+  middlewareLabel: "Shared Utilities",
+
+  services: [
+    { name: "AuthScreen", path: "/", type: "free", description: "Login / Signup with Supabase Auth, email verification handling, password visibility toggle." },
+    { name: "Dashboard", path: "/dashboard", type: "free", description: "Shell with sidebar nav, topbar, footer, right-heart support badge, logout, admin gate." },
+    { name: "ChatPage", path: "/chat", type: "free", description: "AI Doctor chat with conversation sidebar, search, pin, rename, delete, markdown, retry, red-flag emergency handling." },
+    { name: "HealthPage", path: "/health", type: "free", description: "Daily vitals form (upsert), health score ring, 7-day chart, BMI calculator, 30-day history." },
+    { name: "DailyCarePage", path: "/daily-care", type: "free", description: "AI-style personalized care items (high/medium/low), routine cards, streak & consistency stats." },
+    { name: "InsightsPage", path: "/insights", type: "free", description: "30-day stats, AI-style tips, live news, trending topics, nutrition — all from Edge Functions." },
+    { name: "RecordsPage", path: "/records", type: "free", description: "Upload to Supabase Storage, list/filter/search, pin, delete, AI Vision analysis modal with English + Roman Urdu summary." },
+    { name: "NewsPage", path: "/news", type: "free", description: "Live health news from Tavily, category auto-tagging, search, bookmarks (localStorage), grid/list views." },
+    { name: "SettingsPage", path: "/settings", type: "free", description: "Profile, avatar upload, health metrics/BMI, preferences, change password, delete account." },
+    { name: "AdminPage", path: "/admin", type: "admin", description: "Stats overview, user role management, review moderation, blog create/edit/delete." },
+  ],
+
+  middleware: [
+    { name: "loadProfile", description: "Loads the user's profile row after auth; auto-creates a default profile if missing." },
+    { name: "onAuthStateChange", description: "Single Supabase listener keeps session + profile in sync across login/logout." },
+    { name: "checkIsAdmin", description: "Queries profiles.role to guard the AdminPage and admin-only actions." },
+    { name: "callAnalyzeRecord", description: "Fetches the record image, converts to data URL (falling back to signed URLs), then invokes the analyze-record Edge Function." },
+    { name: "extractStoragePath / findRealPathInBucket", description: "Robustly resolves Supabase Storage paths from public/signed URLs before retrying access." },
+    { name: "ConfirmModal", description: "Reusable confirmation/alert modal used for deletes, logouts, errors, and warnings across the app." },
+  ],
+
+  features: [
+    "AI Doctor chat via Supabase Edge Function (chat-ai)",
+    "Red-flag emergency detection (chest pain, stroke, suicidal ideation)",
+    "AI-generated conversation titles + persistent history",
+    "Chat sidebar with search, pin, rename, delete, clear",
+    "Markdown-rendered AI replies with copy, reactions, retry",
+    "Keyboard shortcuts — Ctrl+K focus, Ctrl+N new chat",
+    "Medical record upload to Supabase Storage (JPG, PNG, PDF, DOCX)",
+    "Auto AI Vision analysis on image upload",
+    "AI summary in English AND Roman Urdu",
+    "Structured AI output — medicines, tests, advice, warnings, follow-up",
+    "Daily vitals tracking (HR, sleep, steps, calories, water, weight, mood, BP)",
+    "Health score with 5-factor weighting",
+    "7-day trend chart + 30-day history",
+    "BMI calculator with scale + category",
+    "Personalized Daily Care plan (high/medium/low priority items)",
+    "Suggested 4-slot daily routine (Morning/Midday/Evening/Night)",
+    "Live health news via Tavily (health-news Edge Function)",
+    "News categories, search, bookmarks, grid/list view",
+    "Trending topics + nutrition insights",
+    "Blogs with cover image upload, likes, comments, view counter",
+    "Community review system with admin moderation",
+    "Featured review toggle",
+    "Admin dashboard with platform-wide stats",
+    "User role management (promote/demote admin)",
+    "Supabase Auth with session listener + password change",
+    "Avatar upload to Supabase Storage",
+    "Account deletion with cascading cleanup",
+    "Settings tabs: profile, health, preferences, security",
+    "React 19 + Vite SPA architecture",
+    "Lucide React icon system",
+    "Custom CSS design system",
+    "Toast-style flash messages + ConfirmModal",
+    "localStorage bookmarks & pending chat questions",
+    "Admin blog editor with cover preview",
+  ],
+
+  challenges: [
+    "Building a rule-based red-flag detector that catches life-threatening symptoms before the AI does",
+    "Engineering a vision prompt (analyze-record) that returns reliably-parseable JSON for medical documents",
+    "Resolving Supabase Storage URLs (public vs signed) and converting images to base64 for the AI Edge Function",
+    "Handling 'object not found' by listing the bucket and matching filenames to find the real path",
+    "Keeping Supabase session + profile in sync with a single onAuthStateChange listener",
+    "Auto-creating a profile row for new users without race conditions",
+    "Caching AI insights and news to avoid stale data and repeated provider calls",
+    "Parsing AI JSON responses that occasionally wrap output in markdown fences",
+    "Preventing hallucinated medicines and dosages in the AI output",
+    "Auto-categorizing health news from free-text titles and snippets",
+    "Uploading cover images for blogs and cleaning up storage on delete",
+    "Building a full blog system (create/edit/delete + likes + comments) inside the admin panel",
+    "Cascading account deletion across vitals, records, conversations, reviews, avatar, and profile",
+    "Managing modals (confirm/danger/warning/error) consistently across 10+ components",
+    "Keeping chat responses under 200 words without losing clinical accuracy",
+    "Handling date-scoped vitals with upsert on (user_id, date)",
+    "Making the health score and BMI robust to missing data",
+  ],
+
+  learnings: [
+    "React 19 with hooks (useState, useEffect, useMemo, useCallback, useRef)",
+    "Vite for fast SPA builds and env handling",
+    "Supabase Auth with onAuthStateChange session management",
+    "Supabase PostgreSQL data modeling and upserts",
+    "Supabase Storage uploads (records, avatars, blogs)",
+    "Supabase Edge Functions for AI (chat, news, vision)",
+    "Prompt engineering for safe medical AI",
+    "Red-flag emergency detection layered on top of LLMs",
+    "AI Vision pipelines (URL → base64 → Edge Function)",
+    "Tavily web search for real-time health news",
+    "localStorage for bookmarks and cross-page chat questions",
+    "Reusable ConfirmModal pattern for all confirmations",
+    "Admin moderation workflows (approve/reject/feature)",
+    "Full blog CRUD with cover images, likes, and comments",
+    "Account deletion with cascading cleanup",
+    "Building a production-grade AI product with medical safety",
+  ],
+},
+
+
+  // 6. SIRAJ VERSE — Professional Networking Platform
+  {
+    id: "sirajverse",
+    name: "Siraj Verse",
+    url: "/sirajverse.png",
+    technologies: [
+      "MERN", "React 19", "Node.js", "Express 5", "MongoDB",
+      "JWT", "bcrypt", "Cloudinary", "Multer", "Tailwind CSS",
+      "Framer Motion", "Gemini AI", "React Router 7",
+    ],
+    description:
+      "LinkedIn-style professional networking platform built with the MERN stack and integrated AI features. Create professional profiles, share content, connect with others, and leverage AI-powered tools for smarter networking.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "Siraj Verse is a professional networking platform that combines LinkedIn's business focus with modern AI capabilities — designed for professionals who want to build meaningful connections, not just collect them.",
+          "The platform delivers secure JWT-based authentication, Cloudinary-powered media uploads, AI-assisted career features, and a complete connection-request workflow with duplicate prevention.",
+          "From the animated welcome screen to the floating AI career assistant, every interaction is designed to feel polished and intentional.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "AI Career Assistant",
+        items: [
+          "SirajVerse AI Chat — Gemini-powered assistant for career questions",
+          "Persistent chat history via localStorage",
+          "Floating chat widget accessible from any page",
+          "Toast notifications for message events",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Professional Networking",
+        items: [
+          "Connection requests — send, accept, reject with pending/accepted/rejected workflow",
+          "Suggested users — filter out already-connected profiles",
+          "My Network page with Suggestions, Requests, My Connections tabs",
+          "Regex-based user search across name, headline, and location",
+          "Duplicate request prevention in both directions",
+          "Idempotent accept using $addToSet on both user documents",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete User Journey",
+        paragraphs: [
+          "Signup → Welcome Screen → Edit Profile (avatar, cover, skills, education, experience) → Post / Share → Connection Request → Accept / Reject → AI Career Assistant.",
+          "Every professional artifact — skills, education, experience — is stored as nested arrays on the user document, supporting rich profile editing without requiring separate collections.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Auth, Security & Media",
+        paragraphs: [
+          "JWT sessions as HTTP-only cookies with 7-day expiry, bcrypt password hashing with 10 salt rounds, CORS locked to the client origin with credentials:true, and Multer + multer-storage-cloudinary for direct-to-Cloudinary uploads.",
+          "The upload pipeline accepts images (jpg, png, webp) and videos (mp4, webm, ogg) up to 100MB, streaming directly to Cloudinary without touching disk.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "Siraj Verse taught me how to design social workflows that are robust against edge cases — duplicate requests, race conditions, and reverse-direction conflicts.",
+          "I learned how to build a LinkedIn-style connection workflow with bidirectional duplicate prevention, integrate Gemini AI directly into React with environment variable safety, use multer-storage-cloudinary for direct uploads, manage complex nested form state for skills/education/experience arrays, and design a responsive three-column layout.",
+          "Above all, I learned that professional networking UX is about trust — every state transition (pending, accepted, rejected) must be visible, predictable, and reversible.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/sirajverse",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791447381/sirajverse.mp4",
+    category: "Professional Network",
+    year: "2025",
+    status: "Live",
+    role: "Full-Stack Developer",
+    duration: "3 months",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["React 19", "Vite", "Tailwind CSS", "React Router 7", "Framer Motion", "Jodit React"],
+      backend: ["Node.js", "Express 5", "Mongoose", "JWT", "bcrypt", "Multer"],
+      ai: ["Google Gemini 1.5 Flash", "@google/generative-ai"],
+      media: ["Cloudinary", "multer-storage-cloudinary"],
+      infrastructure: ["MongoDB Atlas", "JWT HTTP-only sessions", "Cloudinary CDN"],
+    },
+
+    architecture: {
+      title: "Monolithic MERN Architecture",
+      description:
+        "Single Express server hosting all route modules — auth, users, posts, connections — with JWT auth, direct-to-Cloudinary uploads, and Gemini AI powered from the client. Every professional artifact (skills, education, experience) is stored as nested arrays on the user document.",
+      layers: [
+        { name: "Client", items: ["React 19 SPA", "React Context", "React Router 7", "Framer Motion", "AI Chat Widget", "Jodit Rich Text Editor"] },
+        { name: "API", items: ["Express 5 server", "JWT isauthuser middleware", "Auth | User | Post | Connection routes", "Multer + Cloudinary storage"] },
+        { name: "AI", items: ["Gemini 1.5 Flash via @google/generative-ai", "Client-side fetch", "localStorage persistence"] },
+        { name: "Data", items: ["MongoDB + Mongoose", "Users, Posts, Connections schemas", "Nested skills/education/experience arrays"] },
+        { name: "External", items: ["Cloudinary (media CDN)", "Google Gemini API", "MongoDB Atlas"] },
+      ],
+    },
+
+    servicesLabel: "Core Modules",
+    middlewareLabel: "Express Middleware",
+
+    services: [
+      { name: "Auth Module", path: "/api", type: "free", description: "Signup (bcrypt + JWT), login, logout. 7-day HTTP-only cookie." },
+      { name: "User Module", path: "/api", type: "free", description: "Current user, all users, profile by ID, profile update with avatar + cover upload." },
+      { name: "Post Module", path: "/api", type: "free", description: "Create post (text/image/video), global feed, user's own posts, like/unlike, comment, delete comment." },
+      { name: "Connection Module", path: "/api/connections", type: "free", description: "Send/accept/reject requests, list pending, get status between users." },
+      { name: "AI Chat Module", path: "client-side", type: "free", description: "Gemini 1.5 Flash assistant — floating widget with localStorage history." },
+    ],
+
+    middleware: [
+      { name: "isauthuser", description: "Verifies JWT from HTTP-only cookie. Attaches req.user = { id }." },
+      { name: "upload (Multer + Cloudinary)", description: "Direct-to-Cloudinary storage. Images (jpg/png/webp) and videos (mp4/webm/ogg) up to 100MB." },
+      { name: "cookie-parser", description: "Parses JWT token from cookies." },
+      { name: "CORS", description: "Locked to CLIENT_URL with credentials:true." },
+      { name: "bcrypt hashing (inline)", description: "Passwords hashed with bcrypt.genSalt(10) + bcrypt.hash." },
+      { name: "Duplicate-connection guard (inline)", description: "Checks both directions for existing pending request." },
+    ],
+
+    features: [
+      "Professional profile with avatar and cover image",
+      "Multi-field profile editing — name, headline, location, gender",
+      "Skills management — add and remove tags",
+      "Education entries — college, degree, field of study",
+      "Experience entries — title, company, description",
+      "Post composer with text, image, and video support",
+      "Global feed + personal posts page",
+      "Like / unlike posts",
+      "Comment on posts with nested replies",
+      "Delete own comments (author + post-owner privilege)",
+      "Share post — copies permalink to clipboard",
+      "My Network page with three tabs",
+      "Send connection requests with duplicate prevention",
+      "Accept / reject connection requests",
+      "Suggested users based on who you're not connected with",
+      "User search by name, headline, location",
+      "AI Career Assistant powered by Gemini 1.5 Flash",
+      "Floating AI chat widget accessible from anywhere",
+      "Persistent chat history via localStorage",
+      "JWT HTTP-only cookie sessions (7-day expiry)",
+      "bcrypt password hashing (10 rounds)",
+      "Cloudinary direct uploads for all media",
+      "Rich text editor (Jodit) support",
+      "Framer-motion animated UI + welcome screen",
+    ],
+
+    challenges: [
+      "Designing a connection workflow that prevents duplicates in both directions",
+      "Ensuring accept-connection is idempotent using $addToSet on both user documents",
+      "Integrating multer-storage-cloudinary for direct buffer-free uploads",
+      "Handling mixed media types (image + video) with a single upload endpoint",
+      "Managing complex nested form state for skills, education, and experience arrays",
+      "Keeping persistent AI chat history in sync with localStorage across reloads",
+      "Calling Gemini API safely from the client using environment variables",
+      "Preventing connection request from being sent twice under rapid clicks",
+      "Filtering suggested users to exclude already-connected profiles",
+      "Building a responsive three-column layout for desktop and mobile",
+      "Handling user search across multiple fields (name, headline, location)",
+      "Using CORS with credentials:true across two origins for cookie-based auth",
+    ],
+
+    learnings: [
+      "Monolithic MERN architecture with per-domain route modules",
+      "JWT sessions with HTTP-only cookies and cross-origin CORS",
+      "bcrypt password hashing and secure session management",
+      "Cloudinary direct uploads with multer-storage-cloudinary",
+      "Handling mixed media types (image/video) in one endpoint",
+      "Google Gemini 1.5 Flash for AI chat integration",
+      "Managing nested array state in React forms",
+      "Context API for global user and post state",
+      "Framer Motion for smooth page transitions",
+      "Rich text editors (Jodit) inside a React app",
+      "Connection workflows with duplicate prevention",
+      "Idempotent MongoDB updates using $addToSet",
+      "Clipboard API for share-permalink features",
+      "localStorage for persistent client-side chat",
+      "Responsive professional-network UI design",
+    ],
+  },
+
+  
+  // 7. SKCoder — Developer Blogging Platform
+  {
+    id: "blog-website",
+    name: "Blog Website",
+    url: "/blog.png",
+    technologies: [
+      "MERN", "React 19", "Node.js", "Express 5", "MongoDB",
+      "JWT", "bcrypt", "Multer", "Bootstrap 5", "Redux Toolkit",
+      "redux-persist", "Jodit Editor", "Axios", "react-hot-toast",
+    ],
+    description:
+      "SKCoder is a modern blog website built with the MERN stack where developers can read, write, and share technical articles. It features full JWT authentication, admin-only post creation, category management, comments, and a rich text editor — with a beautiful dark-mode UI.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "SKCoder is my very first MERN stack project — a developer-focused blogging platform that celebrates technical writing and knowledge sharing.",
+          "The platform provides a clean, distraction-free environment for both writers and readers, with role-based access control, rich text editing, and a fully functional comment system.",
+          "Everything you see here — from the JWT auth flow to the admin dashboard — was learned and built from scratch. It's the project where I fell in love with full-stack development.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "Authentication & Role-Based Access",
+        items: [
+          "JWT sessions in HTTP-only cookies with 3-day expiry",
+          "bcrypt password hashing with 10 salt rounds",
+          "Role-based access — admin can create/edit/delete, users can read/comment",
+          "islogin middleware for comments, isadmin for admin-only routes",
+          "Auto-logout on token expiry via Axios 401 interceptor",
+          "Redux + redux-persist for auth state that survives refresh",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Content Management",
+        items: [
+          "Admin-only post creation with cover image upload (Multer disk storage)",
+          "Rich text editor powered by Jodit — full WYSIWYG editing",
+          "Category system with auto-slug generation and post counts",
+          "Comment system with nested user populate",
+          "Post likes, views, reading time, and featured flags",
+          "Image cleanup on post delete (fs.unlink)",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete User Journey",
+        paragraphs: [
+          "Register → Login (JWT cookie) → Browse /blogs → Read Post → Comment → Admin: Dashboard → Add Post → Publish → Users Comment → Admin Moderates.",
+          "Every post goes through a full lifecycle — draft, published, featured — and every comment is tied to a real user with a populated author reference.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Admin Dashboard & Moderation",
+        paragraphs: [
+          "A full admin dashboard with live stats, tabbed interface for Users / Posts / Comments, ConfirmModal for destructive actions, and SuccessToast feedback.",
+          "Admins can delete users, posts, and comments — with image cleanup on every deletion to prevent orphaned storage in the public/images directory.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "This was my first MERN project — I learned everything from scratch.",
+          "I learned JWT sessions and cookies across CORS, bcrypt hashing, Multer file uploads, Mongoose relations and populate, Redux Toolkit with redux-persist, custom Axios interceptors for token injection, auto-logout on 401 responses, rich text editor integration (Jodit), and how to design and ship a real admin dashboard.",
+          "Above all, I learned the difficulty of shipping a first full-stack project — the small things like fixing inconsistent field naming (Fullname vs FullName vs fullName), serving static images across origins, and writing middleware that fails gracefully.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/Blogwebsite",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791447452/blog.mp4",
+    category: "Blogging / Full-Stack",
+    year: "2025",
+    status: "Live",
+    role: "Full-Stack Developer",
+    duration: "6 weeks",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["React 19", "Vite", "Bootstrap 5", "Redux Toolkit", "redux-persist", "React Router 7", "Jodit React Editor", "Axios", "react-hot-toast"],
+      backend: ["Node.js", "Express 5", "Mongoose", "JWT", "bcrypt", "Multer"],
+      storage: ["Local disk storage (public/images)", "Multer diskStorage", "Automatic image cleanup on delete"],
+      infrastructure: ["MongoDB Atlas", "JWT HTTP-only cookies", "Static file serving (/images)"],
+    },
+
+    architecture: {
+      title: "Monolithic MERN Architecture",
+      description:
+        "Classic MERN app with a single Express server hosting auth, blog, comment, dashboard, category, and public route modules. JWT sessions in cookies, Multer for image uploads, Redux Toolkit with redux-persist on frontend.",
+      layers: [
+        { name: "Client", items: ["React 19 SPA", "Redux Toolkit + PersistGate", "React Router 7", "Bootstrap 5 dark theme", "Jodit rich text editor", "Axios with interceptors"] },
+        { name: "API", items: ["Express 5 server", "Auth | Blog | Comment | Dashboard | Category | Public routes", "isadmin + islogin middleware", "Multer disk upload", "Centralized error handler"] },
+        { name: "Data", items: ["MongoDB + Mongoose", "Users, Posts, Comments, Categories schemas", "Populated relations", "Virtual fields"] },
+        { name: "Storage", items: ["public/images directory", "Unique filenames", "Static serving via /images", "File cleanup on delete"] },
+        { name: "Security", items: ["bcrypt password hashing (10 rounds)", "JWT HTTP-only cookies (3-day)", "CORS locked to CLIENT_URL", "Role-based access"] },
+      ],
+    },
+
+    servicesLabel: "Core Modules",
+    middlewareLabel: "Express Middleware",
+
+    services: [
+      { name: "Auth Module", path: "/auth", type: "free", description: "Register (optional profile upload), login (JWT cookie), logout, get user by ID, update profile." },
+      { name: "Blog Module", path: "/blog", type: "mixed", description: "Create post (admin only), get all posts, get by ID, update, delete (with image cleanup), get posts by user." },
+      { name: "Comment Module", path: "/comments", type: "mixed", description: "Add comment (login required), delete comment (admin only)." },
+      { name: "Dashboard Module", path: "/dashboard", type: "admin", description: "Admin stats — get all data (users + posts + comments), delete user with profile image cleanup." },
+      { name: "Category Module", path: "/categories", type: "mixed", description: "Get all categories with post counts, categories with stats + recent posts, create category (admin), get posts by category." },
+      { name: "Public Module", path: "/public", type: "free", description: "Fetch a single post with nested comments and comment authors populated — no auth required." },
+    ],
+
+    middleware: [
+      { name: "islogin", description: "Verifies JWT from HTTP-only cookie, decodes userid, attaches req.user. Used for login-required routes." },
+      { name: "isadmin", description: "Extends islogin by also checking user.role === 'admin'. Returns 401 if not admin." },
+      { name: "formatRequestBody", description: "Normalizes Fullname/FullName/fullName into a single field and lowercases email." },
+      { name: "upload (Multer diskStorage)", description: "Disk storage to public/images with unique filenames. 5MB limit. JPEG/JPG/PNG/GIF/WebP only." },
+      { name: "cookie-parser", description: "Parses JWT token from cookies." },
+      { name: "CORS", description: "Locked to http://localhost:5173 with credentials:true." },
+      { name: "Centralized Error Handler", description: "Catches all errors, logs them, returns clean JSON error response." },
+    ],
+
+    features: [
+      "JWT authentication in HTTP-only cookies (3-day expiry)",
+      "bcrypt password hashing with 10 salt rounds",
+      "Role-based access control (admin vs user)",
+      "Register with optional profile image upload",
+      "Login / logout with cookie clearing",
+      "Admin-only post creation with cover image",
+      "Rich text editor (Jodit) for post content",
+      "Auto-slug generation for categories",
+      "Category system with post counts",
+      "Comment system with nested user populate",
+      "Comment deletion (admin only)",
+      "Like system on posts",
+      "Post views counter and reading time",
+      "Post update with old image cleanup",
+      "Post delete with image file cleanup",
+      "User delete with profile image cleanup",
+      "Admin dashboard with live stats",
+      "Tabbed interface — Users / Posts / Comments",
+      "ConfirmModal for destructive actions",
+      "Multer disk storage with unique filenames",
+      "Static image serving via /images route",
+      "Axios interceptors for token injection",
+      "Auto-logout on 401 responses",
+      "Redux Toolkit + redux-persist for auth state",
+      "Dark-mode Bootstrap 5 UI",
+    ],
+
+    challenges: [
+      "Building JWT auth from scratch — cookies, CORS, and the 401 flow",
+      "Handling file uploads with Multer (disk storage + filename generation)",
+      "Cleaning up image files on delete to prevent orphaned storage",
+      "Designing a two-way relation between Posts and Comments",
+      "Getting populate to work correctly for nested comment authors",
+      "Learning Redux Toolkit and redux-persist for the first time",
+      "Building custom Axios interceptors for token injection",
+      "Auto-logout on 401 without trapping the user in a redirect loop",
+      "Implementing role-based access on both backend and frontend",
+      "Building a rich text editor (Jodit) integration in React",
+      "Designing the admin dashboard with tabs, modals, and toasts",
+      "Managing form state across register, login, post, and comment",
+      "Fixing inconsistent field naming (Fullname vs FullName vs fullName)",
+      "Serving static images from Express to React across two origins",
+      "Handling category counts and stats efficiently",
+      "Writing middleware that fails gracefully without crashing the server",
+    ],
+
+    learnings: [
+      "This was my first MERN stack project — learned everything from scratch",
+      "JWT authentication with HTTP-only cookies",
+      "bcrypt password hashing and salt rounds",
+      "CORS with credentials across two origins",
+      "Multer disk storage for file uploads",
+      "Mongoose schema design with relations and populate",
+      "Two-way document relations (Post ↔ Comment)",
+      "Express middleware patterns (islogin, isadmin)",
+      "Centralized error handling in Express",
+      "Static file serving with express.static",
+      "File system operations (fs.unlink) for cleanup",
+      "Redux Toolkit state management",
+      "redux-persist for auth state across reloads",
+      "React Router 7 with nested routes",
+      "Axios request and response interceptors",
+      "Auto-logout on 401 responses",
+      "Rich text editor integration (Jodit)",
+      "Building an admin dashboard from scratch",
+      "Confirm modal + toast notification patterns",
+      "The difficulty of shipping a first full-stack project",
+    ],
+  },
+
+  
+  // 8. CODELAB — Browser Code Editor
+  {
+    id: "code-editor",
+    name: "Code Editor",
+    url: "/codelab.png",
+    technologies: [
+      "React 19", "Vite", "CodeMirror 6", "Tailwind CSS",
+      "Firebase Auth", "React Router 7", "react-toastify",
+      "React Icons", "LocalStorage API", "iFrame API",
+    ],
+    description:
+      "CodeLab is a coding platform built with React where users can write and practice HTML, CSS, and JavaScript code in one place. It features CodeMirror 6 editors with syntax highlighting, live iframe output, localStorage persistence, and Google authentication via Firebase.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "CodeLab is an interactive coding playground that lets developers write, test, and preview HTML, CSS, and JavaScript directly in the browser — no setup, no build tools, no server.",
+          "It's a pure frontend React application built for learning, prototyping, and teaching. Everything runs client-side — editors, preview, persistence, and authentication.",
+          "Built with CodeMirror 6 for professional-grade editing, an iframe-based live preview, and Firebase for Google authentication.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "Multi-Language Editor",
+        items: [
+          "CodeMirror 6 — three independent editors for HTML, CSS, JS",
+          "Syntax highlighting via @codemirror/lang-* extensions",
+          "One Dark theme across all editors",
+          "Quick Start templates — one-click boilerplate",
+          "Copy-to-clipboard per editor with toast feedback",
+          "Auto-persist to localStorage on every keystroke",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Live Preview & Output",
+        items: [
+          "Live iframe rendering using contentDocument.write()",
+          "Save button renders all three editors into a single HTML document",
+          "Fullscreen output toggle — expand preview to 100vh",
+          "Collapse/expand chevron for output panel",
+          "Isolated iframe sandbox for safe code execution",
+          "Responsive layout — 3 editors wrap on smaller screens",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete User Flow",
+        paragraphs: [
+          "Open CodeLab → Google Sign-In (Firebase) → Write HTML/CSS/JS → Click Save → Live Preview Renders → Copy Snippets → Auto-Save to localStorage.",
+          "Everything is instant. There's no save button for the code itself — every keystroke is persisted. The Save button is only for rendering the preview, which writes the combined HTML document directly into the iframe's DOM.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Authentication & Persistence",
+        paragraphs: [
+          "Firebase Google authentication with an onAuthStateChanged listener for reactive user state — the navbar updates instantly when the user signs in or out.",
+          "All code is auto-persisted to localStorage per language, restoring state on page reload. Even if the user closes the tab and comes back a week later, their code is exactly where they left it.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "CodeLab taught me how to build professional developer tools in the browser.",
+          "I learned CodeMirror 6 as a modern alternative to Monaco, iframe communication via contentDocument.write(), localStorage synchronization with useEffect, Firebase auth state handling in React, and clean multi-editor layout with Tailwind CSS.",
+          "Above all, I learned that client-side-only applications are powerful — no backend, no server costs, no deployment complexity, just the browser doing all the work.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/codeeditor",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791446706/codeeditor.mp4",
+    category: "Developer Tool",
+    year: "2025",
+    status: "Live",
+    role: "Frontend Developer",
+    duration: "4 weeks",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["React 19", "Vite", "Tailwind CSS", "React Router 7", "React Icons", "react-toastify"],
+      editor: ["CodeMirror 6", "@uiw/react-codemirror", "@codemirror/lang-html", "@codemirror/lang-css", "@codemirror/lang-javascript", "@codemirror/theme-one-dark"],
+      auth: ["Firebase Auth", "GoogleAuthProvider", "onAuthStateChanged listener"],
+      storage: ["LocalStorage API (per-language)", "iFrame contentDocument.write()"],
+      infrastructure: ["Vite dev server", "Static SPA deployment"],
+    },
+
+    architecture: {
+      title: "Client-Only React Architecture",
+      description:
+        "Pure frontend application — no backend. React handles UI, CodeMirror provides editing surface, and browser's iframe API + localStorage handle live preview and persistence.",
+      layers: [
+        { name: "UI", items: ["React 19 SPA", "React Router 7", "Tailwind CSS", "Navbar / Footer / About / Contact", "Responsive 3-editor layout"] },
+        { name: "Editor", items: ["CodeMirror 6 (three instances)", "Language extensions (HTML/CSS/JS)", "One Dark theme", "Quick Start templates", "Copy-to-clipboard"] },
+        { name: "Preview", items: ["iframe ref-based DOM manipulation", "contentDocument.write() rendering", "Fullscreen toggle (100vh)", "Sandboxed execution"] },
+        { name: "Auth", items: ["Firebase Google Sign-In", "onAuthStateChanged reactive state", "Avatar + display name fallback"] },
+        { name: "Persistence", items: ["localStorage per language", "useEffect-driven auto-save", "State restoration on reload"] },
+      ],
+    },
+
+    servicesLabel: "Features",
+    middlewareLabel: "React Hooks",
+
+    services: [
+      { name: "Code Editor", path: "components/Codeeditor.jsx", type: "free", description: "Three CodeMirror 6 editors with syntax highlighting, Quick Start templates, and per-language copy buttons." },
+      { name: "Live Preview", path: "iframe#outputframe", type: "free", description: "Renders combined HTML + CSS + JS into an iframe via contentDocument.write()." },
+      { name: "Persistence", path: "localStorage", type: "free", description: "Auto-saves HTML, CSS, and JS code on every change with useEffect hooks." },
+      { name: "Firebase Auth", path: "Firebase/firebase.js", type: "free", description: "Google Sign-In via signInWithPopup + onAuthStateChanged listener." },
+      { name: "Navigation", path: "components/Navbar.jsx", type: "free", description: "Sticky responsive navbar with hamburger menu, user avatar, and Google login button." },
+      { name: "Info Pages", path: "components/About.jsx", type: "free", description: "About and Contact pages with hero sections, mission statement, and contact form." },
+    ],
+
+    middleware: [
+      { name: "useState", description: "Local state for htmlCode, cssCode, jsCode, isOutputExpanded, and auth user." },
+      { name: "useRef", description: "Holds reference to iframe DOM node for direct contentDocument manipulation." },
+      { name: "useEffect (localStorage sync)", description: "Three separate effects — one per language — writing code to localStorage on every change." },
+      { name: "useEffect (Firebase listener)", description: "Subscribes to auth.onAuthStateChanged for reactive navbar updates." },
+      { name: "contentDocument.write()", description: "Bypasses React re-rendering by writing raw HTML + style + script directly into iframe." },
+      { name: "Toast Notifications", description: "react-toastify feedback for copy actions, success, and error fallbacks." },
+    ],
+
+    features: [
+      "Three CodeMirror 6 editors — HTML, CSS, and JavaScript",
+      "Syntax highlighting via @codemirror/lang-* extensions",
+      "One Dark theme for professional editor look",
+      "Quick Start boilerplate buttons per language",
+      "Copy-to-clipboard per editor with toast feedback",
+      "Live preview via iframe contentDocument.write()",
+      "Fullscreen output toggle (expand to 100vh)",
+      "Collapse/expand chevron for output panel",
+      "Auto-save to localStorage on every keystroke",
+      "State restoration on page reload",
+      "Firebase Google authentication",
+      "onAuthStateChanged reactive navbar",
+      "User avatar + display name with fallback",
+      "Sign-out clears session cleanly",
+      "Responsive 3-editor layout",
+      "Sticky navbar with hamburger mobile menu",
+      "About page with hero, mission, and stats",
+      "Contact page with form and toast feedback",
+      "Fixed footer with developer credit",
+      "Route-based navigation (React Router 7)",
+    ],
+
+    challenges: [
+      "Learning CodeMirror 6's extension-based API after Monaco experience",
+      "Manipulating iframe contentDocument without breaking React's render cycle",
+      "Escaping the script closing tag inside template literals",
+      "Keeping three separate useState hooks in sync with localStorage",
+      "Handling Firebase auth state reactivity without prop drilling",
+      "Preventing memory leaks from onAuthStateChanged subscription",
+      "Building a responsive 3-column editor that wraps cleanly on mobile",
+      "Managing fullscreen state without breaking the editor layout",
+      "Handling graceful fallbacks for missing Firebase user photoURL",
+      "Keeping toast notifications non-intrusive with compact autoClose timers",
+    ],
+
+    learnings: [
+      "CodeMirror 6 as a modern, lightweight alternative to Monaco",
+      "Extension-based architecture for language support",
+      "iframe contentDocument.write() for instant live preview",
+      "Escaping template literal edge cases (script closing tag)",
+      "localStorage patterns with useEffect for state persistence",
+      "Firebase Auth integration with Google OAuth",
+      "onAuthStateChanged subscription and cleanup patterns",
+      "React Router 7 for multi-page SPA navigation",
+      "Tailwind CSS responsive grid layouts",
+      "react-toastify for non-intrusive UX feedback",
+      "Client-side-only application architecture (no backend)",
+      "Building professional developer tools in the browser",
+    ],
+  },
+
+  
+  // 9. SK AI BOT — Gemini-Powered Chatbot  
+  {
+    id: "ai-chatbot",
+    name: "AI ChatBot",
+    url: "/gemini.png",
+    technologies: [
+      "React", "Vite", "React Router 7", "Context API",
+      "Google Gemini API", "React Markdown", "remark-gfm",
+      "React Icons", "Native Fetch API", "CSS3",
+    ],
+    description:
+      "AI Bot is a React chatbot powered by Google Gemini, delivering intelligent real-time responses. It supports text and image prompts, markdown-formatted replies with code blocks, and a clean, distraction-free chat UI built without any backend.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "AI Bot is a client-only AI chatbot built with React 19 and powered directly by Google's Gemini API — no backend, no server costs, no third-party SDK.",
+          "It handles both text and image inputs, letting users upload a photo and ask questions about it. Responses are rendered with beautiful markdown, code blocks, and clickable links.",
+          "Everything runs in the browser using native fetch, a custom markdown parser, and React Context for state management.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "AI Chat Capabilities",
+        items: [
+          "Google Gemini API integration via native fetch",
+          "Multi-part prompts — text + image in a single request",
+          "Image upload via FileReader → base64 encoding",
+          "Inline image support through inline_data MIME type",
+          "Conversation context passed to each request",
+          "Configurable generation params — temperature, topP, topK",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Rich Response Rendering",
+        items: [
+          "Custom markdown formatter written from scratch",
+          "Bold, italic, bold-italic, inline code, code blocks",
+          "Headings (h1, h2, h3) auto-converted from # symbols",
+          "Clickable links via [text](url) syntax",
+          "XSS-safe — escapes &, <, > before formatting",
+          "Full dark theme with distinct user and AI bubbles",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete User Flow",
+        paragraphs: [
+          "Open Chat → Choose action (Upload Image / Generate Image / Chat) → Type prompt → Submit → Loading state → AI response rendered with markdown → Upload another image or ask again.",
+          "The UI is intentionally minimal — a hero section with three action cards when you first land, then a clean chat experience the moment you submit your first prompt.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "State Management & UX",
+        paragraphs: [
+          "Global state is managed with React Context API — no Redux needed. There are separate states for the current user input, the previous prompt, and the AI result.",
+          "The popup menu lets users switch between text chat, image upload, and image generation without leaving the page. Loading states are handled with animated indicators and a contextual input button that switches between a search icon and an up-arrow.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "AI Bot taught me that you don't need a framework or SDK to build a polished AI product.",
+          "I learned direct Gemini API integration without any SDK, base64 image encoding with FileReader, XSS-safe custom markdown parsing, React Context API for global state without Redux, and how to design a chat UI that feels native and responsive.",
+          "Above all, I learned that a zero-backend application can still deliver a production-grade experience — Gemini does the AI, the browser does everything else.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/AIBOT_Website",
+    demoLink: "https://player.cloudinary.com/embed/?cloud_name=dm0eppxqh&public_id=linkedin-video",
+    category: "AI / Chatbot",
+    year: "2024",
+    status: "Live",
+    role: "Frontend Developer",
+    duration: "3 weeks",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["React 19", "Vite", "React Router 7", "React Context API", "React Icons"],
+      ai: ["Google Gemini API", "Native fetch API", "Multi-part prompts", "inline_data (base64 images)"],
+      rendering: ["Custom markdown formatter", "dangerouslySetInnerHTML (sanitized)", "react-markdown + remark-gfm"],
+      storage: ["In-memory React Context state", "FileReader base64 encoding"],
+      infrastructure: ["Client-only SPA (no backend)", "Environment variables (.env)"],
+    },
+
+    architecture: {
+      title: "Client-Only React Architecture",
+      description:
+        "Pure frontend React application — no backend. React Context manages global chat state, browser's fetch API calls Gemini directly, and a custom markdown formatter renders rich AI responses.",
+      layers: [
+        { name: "UI", items: ["React 19 SPA", "React Router 7", "Home / Chat components", "Popup menu", "Custom CSS3 dark theme"] },
+        { name: "State", items: ["React Context API (datacontext)", "User input, feature mode, popup visibility", "Prev user prompt", "AI showresult state"] },
+        { name: "AI", items: ["generateResponse() utility", "Native fetch to Gemini endpoint", "Multi-part prompt builder", "Configurable generationConfig"] },
+        { name: "Rendering", items: ["Custom markdown → HTML formatter", "XSS-safe escaping (&, <, >)", "Regex-based parsing", "dangerouslySetInnerHTML for final injection"] },
+        { name: "Media", items: ["FileReader → base64 encoding", "Data URL preview", "MIME type detection"] },
+      ],
+    },
+
+    servicesLabel: "Features",
+    middlewareLabel: "React Patterns",
+
+    services: [
+      { name: "Chat Input", path: "pages/Home.jsx", type: "free", description: "Text input with dynamic submit button — switches between search icon and up-arrow." },
+      { name: "Image Upload", path: "pages/Home.jsx", type: "free", description: "Hidden file input triggered by button. Reads file as base64 and stores in context." },
+      { name: "Gemini API Client", path: "gemini.js", type: "free", description: "Utility that builds multi-part prompts and calls Gemini via native fetch." },
+      { name: "Chat Display", path: "Chat.jsx", type: "free", description: "Renders previous user prompt (with image preview) and AI response as formatted HTML." },
+      { name: "Markdown Formatter", path: "Chat.jsx", type: "free", description: "Custom regex-based parser — handles bold, italic, code, headings, links." },
+      { name: "Global State", path: "Context/Usercontext.jsx", type: "free", description: "React Context providing all chat state — input, feature mode, popup, user image, prevUser, AI result." },
+    ],
+
+    middleware: [
+      { name: "useContext", description: "Consumes datacontext provider in Home and Chat. Avoids prop drilling." },
+      { name: "useState (in Context)", description: "Six useState hooks in Usercontext — startRes, popup, input, feature, showresult, user, prevUser." },
+      { name: "FileReader API", description: "Reads uploaded image as data URL, splits on comma to extract base64." },
+      { name: "Async/Await + fetch", description: "generateResponse uses async/await with native fetch. Returns parsed text or error strings." },
+      { name: "Conditional Rendering", description: "Hero section shows when startRes is false; Chat component shows when true." },
+      { name: "XSS-Safe HTML Injection", description: "Custom formatter escapes &, <, > BEFORE adding markdown tags, then uses dangerouslySetInnerHTML." },
+    ],
+
+    features: [
+      "Google Gemini API integration (direct REST, no SDK)",
+      "Text + image multi-part prompts",
+      "Image upload via FileReader → base64",
+      "Inline image preview in chat history",
+      "Markdown rendering — bold, italic, code, headings",
+      "XSS-safe custom markdown parser",
+      "Clickable links auto-generated from markdown",
+      "Code blocks with pre formatting",
+      "React Context API for global state",
+      "Conversation context preserved across prompts",
+      "Dynamic submit button (search ↔ arrow)",
+      "Popup menu for quick action switching",
+      "Hero section with three action cards",
+      "Configurable Gemini generation params",
+      "Environment variables for API credentials",
+      "Loading state with friendly message",
+      "Full dark theme with distinct chat bubbles",
+      "Responsive mobile layout",
+      "LinkedIn profile link in navbar",
+      "Zero external SDK — pure fetch API",
+    ],
+
+    challenges: [
+      "Calling Gemini API directly from the browser without exposing the key too badly",
+      "Encoding images to base64 via FileReader and attaching them to prompts",
+      "Building a custom markdown parser that handles bold/italic correctly in order",
+      "Preventing XSS by escaping HTML BEFORE applying markdown formatting",
+      "Handling code blocks vs inline code with regex priority",
+      "Managing 6+ pieces of state without Redux using Context API",
+      "Keeping prevUser and user states in sync during submission",
+      "Preventing race conditions when submitting while a previous request is running",
+      "Gracefully handling API errors without crashing the UI",
+      "Getting the popup menu to stay within viewport on small screens",
+      "Making the input button feel responsive (icon switching)",
+      "Building the entire chat UI without any CSS framework",
+    ],
+
+    learnings: [
+      "Direct Gemini REST API integration without any SDK",
+      "Multi-part prompt structure (text + inline_data)",
+      "Base64 image encoding with FileReader API",
+      "XSS-safe HTML rendering with escape-first strategy",
+      "Custom regex-based markdown parser design",
+      "React Context API as a Redux alternative",
+      "Global state management for chat applications",
+      "Async/await with native fetch for API calls",
+      "Environment variables with Vite (import.meta.env)",
+      "Conditional rendering and state-driven UI",
+      "Chat UI/UX design patterns (user vs AI bubbles)",
+      "Building a zero-backend application",
+    ],
+  },
+
+  
+  // 10. MSB ALLIED BANK — MEAN Stack Banking System
+  {
+    id: "msb-bank",
+    name: "MSB Allied Bank",
+    url: "/msb.png",
+    technologies: [
+      "MEAN", "Angular 21", "Node.js", "Express 5", "MongoDB",
+      "Groq AI", "JWT", "bcrypt", "Tailwind CSS 4", "Angular Material",
+      "Chart.js", "PDFKit", "Nodemailer OAuth2", "Helmet",
+      "express-rate-limit", "Mongoose Sessions",
+    ],
+    description:
+      "Production-grade full-stack banking system built on the MEAN stack. Features accounts, atomic fund transfers with double-entry ledger, loans with EMI calculator, debit/credit cards, PDF statements, admin analytics dashboard, email notifications, and an AI banking assistant powered by Groq.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "MSB Allied Bank is a production-grade full-stack banking application built on the MEAN stack — Angular 21, Node.js + Express, and MongoDB with Mongoose.",
+          "It handles the core banking domain end-to-end: account creation, atomic fund transfers with double-entry ledger, loans with auto-EMI calculation, debit/credit card issuance, PDF statement generation, admin analytics, email notifications, and a Groq-powered AI banking assistant.",
+          "Every financial operation runs inside MongoDB sessions with idempotency keys — guaranteeing ACID compliance and preventing duplicate transactions even under concurrent load. This is not a demo — it's an engineering exercise in the kind of correctness that real banking systems require.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "AI Banking Assistant (Groq)",
+        items: [
+          "AI Chat — Contextual banking Q&A aware of user accounts and recent transactions",
+          "Financial Advisor — Personalized advice based on balance, active loans, spending patterns",
+          "Transaction Analyzer — Period-based insights (week / month / year)",
+          "Loan Eligibility Checker — AI assessment with recommended amount",
+          "Powered by Groq LLaMA (openai/gpt-oss-20b)",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Core Banking Operations",
+        items: [
+          "Account Management — Multi-account support with real-time balance via ledger aggregation",
+          "Atomic Fund Transfers — MongoDB sessions + idempotency keys prevent duplicates",
+          "Double-Entry Ledger — Every transaction creates balanced DEBIT and CREDIT entries",
+          "Account Status Control — ACTIVE / FROZEN / CLOSED with admin override",
+          "Multi-Currency Ready — Currency field on every account (defaults to PKR)",
+          "Immutable Ledger — Mongoose pre-hooks block updates/deletes",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Cards & Loans Modules",
+        items: [
+          "Card Issuance — Auto-generated 16-digit numbers, CVV, 5-year expiry",
+          "Card Types — DEBIT, CREDIT, PREPAID with daily & monthly limits",
+          "Card Controls — Block/activate, update limits, change PIN, transaction log",
+          "Loan Application — Min 1,000 PKR, max 10,000,000 PKR, tenure 1–60 months",
+          "Auto EMI Calculator — Reducing-balance formula with 12% annual interest",
+          "Loan Workflow — PENDING → APPROVED/REJECTED → ACTIVE → CLOSED",
+          "Atomic Disbursement — System account → borrower account (MongoDB session)",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete Banking Pipeline",
+        paragraphs: [
+          "Signup (bcrypt + JWT cookie) → Create Account → Fund Deposit → Fund Transfer (Atomic) → Ledger Entry (DEBIT + CREDIT) → Email Notification → Statement PDF → Card Issuance → Loan Application → Admin Approval → Loan Disbursement.",
+          "Every step is transactional. Balances are computed on-the-fly via ledger aggregation — there's no cached balance field to go stale. The ledger is immutable: once a DEBIT + CREDIT pair is written, it cannot be modified or deleted.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Admin Dashboard & Reports",
+        paragraphs: [
+          "A full admin console with live analytics powered by Chart.js — system-wide stats, transaction distribution, loan status pie chart, card analytics, user search, block/unblock users, promote to system admin, daily reports, revenue reports, and system health monitoring.",
+          "Every report is computed from real data — not mocked. Transaction analytics update by day, week, and month. Loan analytics surface pending approvals in a queue. Revenue reports track interest income.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "MSB Allied Bank taught me how to build software where correctness is non-negotiable — the kind of engineering that powers banks, payment processors, and financial infrastructure.",
+          "I learned MEAN stack architecture, MongoDB multi-document sessions for ACID compliance, double-entry accounting system design, idempotency patterns for financial APIs, JWT auth with HTTP-only cookies, loan EMI reducing-balance formulas, PDF generation with PDFKit streams, Nodemailer OAuth2, Groq AI integration, Angular Material + Tailwind UI, Chart.js analytics dashboards, and security hardening with Helmet, CORS, and rate limiting.",
+          "Above all, I learned that the hardest part of building financial software is not the features — it's the correctness. Preventing double-spending. Ensuring the ledger always balances. Handling partial failures gracefully. Those are the things that matter.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/MSB_BANK_PROJECT",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791447621/msbbank.mp4",
+    category: "Banking / Full-Stack",
+    year: "2026",
+    status: "Live",
+    role: "Full-Stack Developer",
+    duration: "3 months",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["Angular 21", "Angular Material 21", "Tailwind CSS 4", "Chart.js 4", "ngx-toastr", "RxJS 7", "TypeScript 5.9"],
+      backend: ["Node.js", "Express 5", "Mongoose 9", "JWT", "bcryptjs", "Helmet", "express-rate-limit", "moment"],
+      database: ["MongoDB", "Mongoose Sessions (ACID)", "Aggregation pipelines", "Immutable ledger with pre-hooks", "Compound indexes"],
+      ai: ["Groq SDK", "LLaMA (openai/gpt-oss-20b)", "Contextual prompt injection"],
+      services: ["PDFKit (statements)", "Nodemailer + OAuth2", "ExcelJS (reports)", "Node-cron"],
+      infrastructure: ["MongoDB Atlas", "JWT HTTP-only cookies", "Helmet", "Rate limiting", "CORS with credentials"],
+    },
+
+    architecture: {
+      title: "MEAN Stack Architecture — ACID-Compliant Banking",
+      description:
+        "Production-grade MEAN stack with Angular 21 SPA, Express 5 REST API, and MongoDB with sessions for ACID-compliant financial operations. Every money movement creates a balanced ledger pair protected by an idempotency key. Balance is computed on-the-fly via aggregation — there is no cached balance field.",
+      layers: [
+        { name: "Client (Angular 21)", items: ["Standalone Components", "Angular Material", "Tailwind CSS 4", "Chart.js analytics", "Route guards", "HTTP interceptor with credentials"] },
+        { name: "API (Express 5)", items: ["Auth | Account | Transaction | Loan | Card routes", "Admin | Statement | AI routes", "JWT middleware", "System-user guard", "Rate limiting (100 req/15 min)", "Helmet CSP + CORS"] },
+        { name: "Business Logic", items: ["Atomic transfers with mongoose.startSession()", "Idempotency key lookup", "Balance via ledger aggregation", "EMI reducing-balance formula", "Immutable ledger (pre-hook blocks updates)"] },
+        { name: "Data (MongoDB)", items: ["User | Account | Transaction | Ledger schemas", "Loan | Card | Notification | Bank | Branch schemas", "Compound indexes", "Session-based multi-document transactions"] },
+        { name: "Integrations", items: ["Groq AI", "PDFKit", "Nodemailer OAuth2", "ExcelJS"] },
+      ],
+    },
+
+    servicesLabel: "Core Modules",
+    middlewareLabel: "Express Middleware",
+
+    services: [
+      { name: "Auth Module", path: "/api/auth", type: "free", description: "Register (bcrypt + JWT cookie), login, logout, get current user. 7-day HTTP-only cookie." },
+      { name: "Account Module", path: "/api/accounts", type: "free", description: "Create account, get balance via ledger aggregation, get user's accounts." },
+      { name: "Transaction Module", path: "/api/transaction", type: "mixed", description: "User-to-user transfers (atomic), system fund transfers (admin only), transaction lists." },
+      { name: "Loan Module", path: "/api/loans", type: "mixed", description: "Apply for loan, get user loans, loan details, approve/reject (admin with atomic disbursement)." },
+      { name: "Card Module", path: "/api/cards", type: "free", description: "Request card, get user cards, card details, block/activate, update limits, change PIN, transaction log." },
+      { name: "Statement Module", path: "/api/statements", type: "free", description: "Get account statement JSON with date filter, download PDF statement via PDFKit." },
+      { name: "Admin Module", path: "/api/admin", type: "admin", description: "System stats, user list, block/unblock, promote to admin, analytics, reports, health." },
+      { name: "AI Module", path: "/api/ai", type: "free", description: "AI chat, financial advisor, transaction analyzer, loan eligibility checker — powered by Groq." },
+    ],
+
+    middleware: [
+      { name: "Authmiddleware", description: "Verifies JWT from cookie or Authorization header. Loads user from MongoDB, attaches req.user." },
+      { name: "SystemAuthmiddleware", description: "Extends Authmiddleware by requiring user.SystemUser === true. Protects admin routes." },
+      { name: "helmet", description: "Security headers with CSP disabled for dev. Protects against XSS, clickjacking." },
+      { name: "cors", description: "Locked to http://localhost:4200 (Angular) with credentials:true." },
+      { name: "rateLimit", description: "100 requests per 15 minutes per IP on all /api routes." },
+      { name: "cookie-parser", description: "Parses JWT token cookie on every request." },
+      { name: "Mongoose Ledger pre-hooks", description: "Blocks findOneAndUpdate, updateOne, deleteOne on Ledger — making entries immutable." },
+      { name: "User password pre-save hook", description: "Automatically bcrypt-hashes password when modified." },
+    ],
+
+    features: [
+      "JWT authentication with HTTP-only cookies (7-day expiry)",
+      "bcrypt password hashing (10 salt rounds via Mongoose hook)",
+      "Multi-account management with real-time balance",
+      "Atomic fund transfers with MongoDB sessions",
+      "Idempotency keys prevent duplicate transactions",
+      "Double-entry ledger (balanced DEBIT + CREDIT pairs)",
+      "Immutable ledger entries (pre-hook blocks modifications)",
+      "Balance calculated via MongoDB aggregation (no cached field)",
+      "Account status control (ACTIVE / FROZEN / CLOSED)",
+      "Debit / Credit / Prepaid card issuance",
+      "Auto-generated 16-digit card numbers + CVV + 5-year expiry",
+      "Card block / activate with reason tracking",
+      "Card limit management (daily + monthly)",
+      "Secure PIN change flow",
+      "Per-card transaction history",
+      "Loan application with auto EMI calculation",
+      "Reducing-balance EMI formula (12% annual interest)",
+      "Admin loan approval with atomic disbursement",
+      "Loan status workflow (PENDING → APPROVED → ACTIVE → CLOSED)",
+      "PDF account statement download (PDFKit streaming)",
+      "Email notifications via Nodemailer OAuth2 (Gmail)",
+      "AI banking assistant (Groq LLaMA)",
+      "AI financial advisor with live user data",
+      "AI transaction analyzer by period",
+      "AI loan eligibility checker",
+      "Admin dashboard with system-wide analytics",
+      "Transaction analytics by day/week/month",
+      "Loan analytics with pending approvals queue",
+      "Card analytics by type and status",
+      "Daily report + revenue report (interest income)",
+      "System health monitoring (DB status, uptime, failure rate)",
+      "User search (regex by name/email/mobile)",
+      "Block / unblock users (freezes their accounts)",
+      "Promote user to system admin",
+      "Helmet security headers",
+      "Rate limiting (100 req / 15 min on /api)",
+      "Angular 21 + Material + Tailwind 4 frontend",
+      "Chart.js analytics dashboards",
+      "Route guards (authGuard + systemUserGuard)",
+    ],
+
+    challenges: [
+      "Implementing ACID-compliant transfers with MongoDB sessions",
+      "Designing a reliable double-entry ledger (DEBIT/CREDIT pairs)",
+      "Making ledger entries truly immutable via Mongoose pre-hooks",
+      "Calculating balance on-the-fly via aggregation (no cached field)",
+      "Handling idempotency to prevent duplicate transactions",
+      "Building the loan EMI reducing-balance formula from scratch",
+      "Managing atomic loan disbursement across system + user accounts",
+      "Preventing multiple active loans per account",
+      "Auto-generating unique card numbers + CVV via Mongoose hooks",
+      "Designing card PIN change without exposing CVV field",
+      "Wiring Groq AI with live user financial context without leaking data",
+      "Generating PDF statements server-side with PDFKit streams",
+      "Configuring Nodemailer OAuth2 for Gmail delivery",
+      "Setting up CORS + credentials for Angular ↔ Express communication",
+      "Applying rate limiting and Helmet without breaking the SPA",
+      "Building route guards that handle both JWT and SystemUser flags",
+      "Designing admin analytics with Chart.js for 4 data shapes",
+      "Paginating user lists while eagerly loading balances and loans",
+      "Handling 401 interceptor in Angular to auto-redirect on token expiry",
+      "Keeping the immutable ledger safe from accidental updateOne calls",
+    ],
+
+    learnings: [
+      "MEAN stack architecture (Angular 21 + Express 5 + MongoDB)",
+      "MongoDB sessions and multi-document transactions",
+      "Atomic operations with session.startTransaction()",
+      "Double-entry accounting system design",
+      "Idempotency patterns for financial APIs",
+      "Immutable data models with Mongoose pre-hooks",
+      "On-the-fly balance calculation via aggregation pipelines",
+      "JWT authentication with secure HTTP-only cookies",
+      "bcrypt password hashing via Mongoose pre-save hooks",
+      "SystemUser role-based access control",
+      "Loan EMI and interest calculation formulas",
+      "PDF generation with PDFKit streams",
+      "Email delivery with Nodemailer + OAuth2",
+      "Groq AI integration with contextual user data",
+      "Angular Material + Tailwind UI composition",
+      "Chart.js dashboards for multiple data shapes",
+      "RxJS services with credentials:true for cookies",
+      "Angular route guards with inject() pattern",
+      "Rate limiting, Helmet, and CORS hardening",
+      "Production-grade banking domain modeling",
+    ],
+  },
+
+  
+  // 11. ECHO MARKET — React Native Mobile Marketplace
+  {
+    id: "echo-market",
+    name: "Echo Market",
+    url: "/echomarket.png",
+    technologies: [
+      "React Native", "Expo", "Clerk Auth", "Firebase",
+      "Expo Image Picker", "Expo Camera", "Expo File System",
+      "AsyncStorage", "React Native Vector Icons", "Expo Linear Gradient",
+    ],
+    description:
+      "Echo Market is a full-featured mobile marketplace built with React Native and Expo. List items with photos, browse by category, place orders with delivery location, and manage listings as a seller — with Clerk authentication and Firebase Realtime Database.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "Echo Market is a cross-platform mobile marketplace built with React Native and Expo Router — a complete buying and selling experience that runs natively on iOS and Android.",
+          "It connects buyers and sellers in a local community with real-time listings, category browsing, image-rich posts, and a streamlined buy-now flow with delivery location.",
+          "The app uses Clerk for secure Google/Facebook/email authentication, Firebase Realtime Database for real-time listing sync, and Expo Image Picker for camera and gallery uploads.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "Buying & Selling Flow",
+        items: [
+          "Create listings with title, description, price, original price, and photos",
+          "Image upload via gallery or in-app camera capture",
+          "Category system — Electronics, Fashion, Vehicles, Sports, more",
+          "Condition tagging — Brand New, Like New, Good, Fair, Vintage",
+          "Pakistan mobile number validation with +92 prefix formatting",
+          "Buy Now flow with confirmation modal and delivery location entry",
+          "Order placement saved to Firebase with pending status",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Authentication & User Profiles",
+        items: [
+          "Clerk authentication — Google, Facebook, and email sign-in",
+          "Email verification flow with 6-digit code",
+          "Forgot password with reset code via email",
+          "Persistent user data via AsyncStorage (offline fallback)",
+          "Profile page with listings, orders, and sales tabs",
+          "Sign-out flow with AsyncStorage cleanup",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete User Journey",
+        paragraphs: [
+          "Splash → Login (Google/Facebook/Email) → Browse Home Feed → Select Category → View Item Detail → Buy Now → Confirm → Enter Location → Order Placed → View Orders in Profile.",
+          "The home feed streams listings in real time using Firebase onValue listeners. Orders are stored in a shared /orders node with buyer ID, seller ID, item details, and delivery location. Sellers can confirm or cancel pending orders.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Real-Time Data & Order Lifecycle",
+        paragraphs: [
+          "Firebase Realtime Database streams listings in real time using onValue listeners with proper cleanup on unmount. Orders move through a clear status workflow: pending → confirmed → completed/cancelled.",
+          "The three-tab profile view gives both buyers and sellers a single place to manage everything — their listings, their orders, and their incoming sales.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "Echo Market taught me how to build a production mobile app with real authentication, real data, and real user flows.",
+          "I learned Expo Router file-based navigation with auth-protected route groups, Clerk authentication with OAuth providers on native, Firebase Realtime Database with real-time onValue subscriptions, Expo Image Picker for camera and gallery, AsyncStorage offline fallback, and how to build a full marketplace with buyer and seller dual roles.",
+          "Above all, I learned that mobile UX is different — every interaction must feel instant, every state must be visible, and every permission must be requested gracefully.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/echo-market",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791447848/echo.mp4",
+    category: "Mobile / Marketplace",
+    year: "2025",
+    status: "Live",
+    role: "Mobile Developer",
+    duration: "2 months",
+    team: "Solo Project",
+
+    techStack: {
+      mobile: ["React Native", "Expo SDK", "Expo Router (file-based)", "React Native StyleSheet", "React Native Animated"],
+      auth: ["Clerk Expo", "@clerk/clerk-expo", "Google OAuth", "Facebook OAuth", "Email + Password + OTP"],
+      database: ["Firebase Realtime Database", "onValue real-time listeners", "push + set + update + remove"],
+      media: ["Expo Image Picker (gallery + camera)", "Expo File System (base64 conversion)"],
+      ui: ["Expo Linear Gradient", "React Native Vector Icons", "React Native Modal", "Animated ScrollView", "AsyncStorage"],
+      infrastructure: ["EAS Build (Android + iOS)", "Expo SDK config (app.json)"],
+    },
+
+    architecture: {
+      title: "Expo Router + Clerk + Firebase Architecture",
+      description:
+        "Mobile-first architecture using Expo Router's file-based navigation with auth-protected route groups, Clerk for authentication state, and Firebase Realtime Database for real-time data streaming.",
+      layers: [
+        { name: "Navigation", items: ["Expo Router file-based routing", "(auth) group — Login/SignIn/SignUp/ForgotPassword", "(tabs) group — Home/About/AddPost/Profile", "InitialRedirect guard"] },
+        { name: "Auth", items: ["ClerkProvider at root", "useAuth + useUser hooks", "Google/Facebook/Email OAuth", "Email OTP verification", "AsyncStorage fallback"] },
+        { name: "Data", items: ["Firebase Realtime Database", "/posts node with real-time sync", "/orders node with buyer + seller views", "/categories node", "onValue listeners with cleanup"] },
+        { name: "UI", items: ["5 tab screens", "PostDetail with buy flow", "ConfirmationModal + LocationModal", "Animated scroll header", "Responsive size helpers"] },
+        { name: "Media", items: ["Expo Image Picker — gallery", "Expo Image Picker — camera", "Base64 conversion via File System"] },
+      ],
+    },
+
+    servicesLabel: "Screens",
+    middlewareLabel: "Expo Patterns",
+
+    services: [
+      { name: "Login Screen", path: "screens/Login.jsx", type: "free", description: "Landing screen with Clerk OAuth — Google, Facebook, email sign-in." },
+      { name: "Sign In Screen", path: "screens/SignIn.jsx", type: "free", description: "Email + password sign-in with validation." },
+      { name: "Sign Up Screen", path: "screens/SignUp.jsx", type: "free", description: "Registration with first/last name, email, password, and OTP verification." },
+      { name: "Forgot Password", path: "screens/ForgotPassword.jsx", type: "free", description: "Password reset — sends reset code to email via Clerk." },
+      { name: "Home Tab", path: "components/HomeTab.jsx", type: "free", description: "Marketplace feed with hero image, search, category chips, alternating card layout." },
+      { name: "About Tab", path: "components/AboutTab.jsx", type: "free", description: "Marketing content — mission, features, benefits, founder bio, stats, contact." },
+      { name: "Add Post Tab", path: "components/AddPostTab.jsx", type: "free", description: "Listing form with camera/gallery picker, category + condition chips, +92 mobile formatting." },
+      { name: "Profile Tab", path: "components/ProfileTab.jsx", type: "free", description: "Three tabs — My Listings (edit/delete), My Orders, My Sales (confirm/cancel)." },
+      { name: "Post Detail", path: "screens/PostDetail.jsx", type: "free", description: "Full item view with seller card, description, details grid, Buy Now button." },
+      { name: "Confirmation Modal", path: "components/ConfirmationModal.jsx", type: "free", description: "Purchase confirmation dialog showing item image, price, and seller." },
+      { name: "Location Modal", path: "components/LocationModal.jsx", type: "free", description: "Delivery address input with 'Use Current Location' button." },
+    ],
+
+    middleware: [
+      { name: "InitialRedirect Guard", description: "Watches Clerk's isSignedIn + Expo Router segments. Redirects between (auth) and (tabs) groups." },
+      { name: "ClerkProvider + ClerkLoaded", description: "Root provider wraps entire app. ClerkLoaded ensures auth state ready before rendering children." },
+      { name: "onValue listener with cleanup", description: "Firebase onValue subscriptions return unsubscribe function. useEffect cleanup calls it on unmount." },
+      { name: "AsyncStorage fallback", description: "User data saved to AsyncStorage when Clerk loads. Local data displays instantly." },
+      { name: "Responsive size helpers", description: "responsiveSize() and responsiveHeight() scale pixel values based on screen size." },
+      { name: "Expo Image Picker + File System", description: "Gallery and camera capture, then base64 conversion for Firebase storage." },
+      { name: "Optimistic UI updates", description: "Like button updates state immediately, calls Firebase in background, rolls back on failure." },
+    ],
+
+    features: [
+      "Google, Facebook, and email sign-in via Clerk",
+      "Email OTP verification flow",
+      "Forgot password with reset code",
+      "Persistent user data via AsyncStorage (offline fallback)",
+      "Marketplace home feed with real-time Firebase sync",
+      "Search bar with live filtering",
+      "Category filter chips",
+      "Alternating single/double card layout for variety",
+      "Like button with optimistic UI updates",
+      "Image upload via gallery (Expo Image Picker)",
+      "Camera capture for in-app photos",
+      "Form with category + condition chips",
+      "Pakistan mobile number formatting (+92XXXXXXXXXX)",
+      "Buy Now flow with confirmation modal",
+      "Delivery location input with 'Use Current Location'",
+      "Order placement saved to Firebase",
+      "Profile with 3 tabs — Listings / Orders / Sales",
+      "Edit and delete own listings",
+      "Confirm or cancel pending sales",
+      "Order status transitions — pending → confirmed → completed",
+      "Sign out with AsyncStorage cleanup",
+      "Animated scroll header with fade",
+      "Pull-to-refresh on Home feed",
+      "Responsive sizing across devices",
+      "About page with founder bio and stats",
+    ],
+
+    challenges: [
+      "Setting up Expo Router file-based navigation with auth-protected groups",
+      "Integrating Clerk OAuth (Google + Facebook) inside a native Expo app",
+      "Handling Clerk's native redirect URL across iOS and Android",
+      "Preventing the flash-of-login-screen using ClerkLoaded",
+      "Building real-time Firebase onValue listeners with proper cleanup",
+      "Managing 3 user roles in one screen (buyer, seller, browser)",
+      "Sending image URIs to Firebase — base64 vs Storage tradeoffs",
+      "Formatting Pakistani mobile numbers consistently across inputs",
+      "Building a modal stack (confirm → location → success) without a modal library",
+      "Optimistic UI updates with rollback on failure",
+      "Designing a responsive layout that works on both small phones and tablets",
+      "Auto-generating sizes using Dimensions and a baseline scale",
+      "Keeping AsyncStorage and Clerk user data in sync",
+      "Handling Firebase write failures without breaking the UI",
+      "Building alternating card layouts in a FlatList",
+      "Capping scroll performance with Animated ScrollView",
+    ],
+
+    learnings: [
+      "React Native + Expo SDK for cross-platform mobile development",
+      "Expo Router file-based navigation with route groups",
+      "Clerk authentication with Google and Facebook OAuth on native",
+      "Clerk email verification with 6-digit OTP codes",
+      "Firebase Realtime Database with onValue real-time subscriptions",
+      "Cleanup patterns for Firebase listeners in useEffect",
+      "AsyncStorage for persistent offline-first user data",
+      "Expo Image Picker for gallery and camera access",
+      "Expo File System for image base64 conversion",
+      "Optimistic UI updates with error rollback",
+      "Modal patterns with React Native's built-in Modal component",
+      "Animated ScrollView with interpolated opacity",
+      "Responsive sizing with Dimensions and baseline scaling",
+      "Multi-tab profile UI with listing/order/sales views",
+      "Deep linking to phone, email, and maps via Linking API",
+      "Building a full marketplace with dual buyer-seller roles",
+      "Polished mobile UI with Expo LinearGradient and Ionicons",
+    ],
+  },
+
+  
+  // 12. THUMBX — YouTube Thumbnail Grabber
+  {
+    id: "thumbx",
+    name: "ThumbX",
+    url: "/thumbx.png",
+    technologies: ["Node.js", "Express.js", "EJS", "Bootstrap", "Axios", "JavaScript"],
+    description:
+      "YouTube Thumbnail Grabber built with Node.js and Express.js using EJS templating. Extract and download high-quality thumbnails from any YouTube video in seconds — supports 4K, HD, SD, Shorts, and more. No signup, no watermark.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "ThumbX is a fast, clean, and fully responsive YouTube Thumbnail Grabber built with Node.js, Express.js, and EJS templating.",
+          "It lets anyone extract and download high-quality thumbnails from any YouTube video in seconds — no signup, no watermark, no tracking.",
+          "The tool supports every major YouTube URL format and generates a full gallery of available thumbnail resolutions with video metadata.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "URL Parsing & Video Metadata",
+        items: [
+          "Multi-format URL support — youtube.com/watch, youtu.be, shorts, embed, m.youtube",
+          "5 thumbnail resolutions — Maxres (Full HD), SD, HQ, MQ, Default",
+          "Auto-fetches video title, author, and preview thumbnail via YouTube's oEmbed API",
+          "Graceful error handling for private or deleted videos",
+          "REST API endpoint (/api/thumbnails) for AJAX integrations",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "User Experience",
+        items: [
+          "One-click download with smart filename generation",
+          "Full-size image preview modal with download option",
+          "Loading overlay with animated spinner for smooth UX",
+          "Toast notifications for success and error feedback",
+          "Keyboard shortcut (Ctrl/Cmd + Enter) to submit instantly",
+          "SEO-friendly meta tags and FAQ schema",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete User Flow",
+        paragraphs: [
+          "Open ThumbX → Paste any YouTube URL → Click Fetch → Preview modal opens → Choose resolution → Download thumbnail.",
+          "Every step is instant. The URL parser accepts any YouTube format without requiring the user to remember a specific pattern. The metadata fetch happens server-side via oEmbed, so the UI stays fast and clean.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "EJS Templating & Responsive Design",
+        paragraphs: [
+          "The app uses EJS partial-based templating with clean separation of head, header, footer, and scripts. Bootstrap 5 provides the responsive foundation, and everything works flawlessly across Android, iOS, tablets, laptops, and desktops.",
+          "Zero logs. Zero tracking. Zero watermark. The whole tool is a privacy-first utility that does exactly what it says — nothing more, nothing less.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "ThumbX taught me that small tools, done well, can be incredibly useful.",
+          "I learned Express.js routing and middleware patterns, EJS templating with partials, server-side API integration with Axios, blob-based file downloads in the browser, Bootstrap 5 responsive design, REST API design, and how to write SEO-friendly pages for utility websites.",
+          "Above all, I learned that user experience matters even in a two-week project — the loading overlay, the toast notifications, the keyboard shortcut — all of it makes the tool feel polished.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/Youtube_Thumb",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791447938/thumb.mp4",
+    category: "Web Tool / Utility",
+    year: "2026",
+    status: "Live",
+    role: "Full-Stack Developer",
+    duration: "2 weeks",
+    team: "Solo Project",
+
+    features: [
+      "Multi-format YouTube URL support (watch, youtu.be, shorts, embed, mobile)",
+      "5 thumbnail resolutions — Maxres 1080p, SD, HQ, MQ, Default",
+      "Auto-fetch video title, author and preview via YouTube oEmbed API",
+      "One-click download with smart filename generation",
+      "Full-size image preview modal with download option",
+      "Loading overlay with animated spinner",
+      "Toast notifications for success and error feedback",
+      "Keyboard shortcut (Ctrl/Cmd + Enter)",
+      "REST API endpoint for AJAX integrations",
+      "EJS partial-based templating (head, header, footer, scripts)",
+      "Fully responsive Bootstrap 5 layout",
+      "SEO-friendly meta tags and FAQ schema",
+    ],
+
+    challenges: [
+      "Building a flexible URL parser that handles all YouTube URL formats",
+      "Handling YouTube oEmbed API errors gracefully for private/deleted videos",
+      "Implementing reliable client-side downloads across mobile browsers",
+      "Managing EJS partial structure for clean, reusable markup",
+      "Designing a smooth UX with loading overlay and toast feedback",
+      "Ensuring cross-browser compatibility for the blob-based download system",
+    ],
+
+    learnings: [
+      "Express.js routing and middleware patterns",
+      "EJS templating with partials and layouts",
+      "Server-side API integration with Axios",
+      "Blob-based file downloads in the browser",
+      "Bootstrap 5 responsive design systems",
+      "REST API design and JSON responses",
+      "SEO best practices for tool websites",
+      "Graceful error handling for third-party APIs",
+    ],
+  },
+
+  
+  // 13. TRANSLATION APP — Vanilla JS 
+  {
+    id: "translation-app",
+    name: "Translation App",
+    url: "/translater.png",
+    technologies: [
+      "HTML5", "CSS3", "JavaScript",
+      "MyMemory API", "Font Awesome 6",
+      "Web Speech API (SpeechSynthesis)", "Clipboard API",
+    ],
+    description:
+      "A lightweight, framework-free translation web app built with pure HTML, CSS, and JavaScript. Translate text between 100+ languages, hear pronunciations, swap languages, and copy results — all in the browser with zero dependencies.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "The Translation App is a fast, distraction-free tool for translating text between more than 100 languages — built entirely with vanilla HTML, CSS, and JavaScript.",
+          "No React. No Vue. No build tools. No dependencies. Just the browser doing everything it was designed to do.",
+          "It uses the free MyMemory Translation API for translation, the native Web Speech API for text-to-speech, and the Clipboard API for copying.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "Translation Engine",
+        items: [
+          "MyMemory Translation API integration via native fetch",
+          "100+ language support through a country-to-locale map",
+          "URL-encoded queries using encodeURIComponent",
+          "Response parsing with fallback error handling",
+          "Loading state with animated spinner in the button",
+          "Auto-selected defaults — English (en-US) → Urdu (ur-PK)",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "Rich Interaction Features",
+        items: [
+          "Text-to-speech — speak text in the selected language via SpeechSynthesis",
+          "Language swap button — swaps both text and language instantly",
+          "Copy to clipboard per side — with icon feedback",
+          "Live character counter for both input and output",
+          "Error alerts and connection failure messages",
+          "Disabled state during translation to prevent duplicate requests",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete User Flow",
+        paragraphs: [
+          "Open app → Select source language → Type text → Select target language → Click Translate → Loading spinner → Translation rendered → Copy / Speak / Swap.",
+          "Every interaction is instant. There's no page reload, no loading screen, no backend. The whole app runs on the browser's native capabilities.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Design & Responsiveness",
+        paragraphs: [
+          "Blue gradient theme with depth via inset shadows and layered box-shadows. Grid-based two-column layout that collapses to a single column on mobile.",
+          "Tested across five breakpoints — 1200px, 992px, 768px, 480px, and 360px — the app looks polished on every screen size.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "The Translation App taught me that vanilla JavaScript is still incredibly powerful when you understand the platform.",
+          "I learned async/await without framework utilities, DOM manipulation with querySelectorAll and forEach, Web Speech API integration, Clipboard API with document.execCommand fallback, dynamically generating 100+ option elements, and designing responsive layouts with pure CSS Grid and media queries.",
+          "Above all, I learned that frameworks are conveniences — not requirements. The browser can do almost anything on its own.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/Translator",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791448099/translator.mp4",
+    category: "Utility / Vanilla JS",
+    year: "2024",
+    status: "Live",
+    role: "Frontend Developer",
+    duration: "2 weeks",
+    team: "Solo Project",
+
+    techStack: {
+      frontend: ["HTML5 semantic markup", "CSS3 Grid & Flexbox", "Vanilla JavaScript (ES Modules)", "Font Awesome 6 icons"],
+      apis: ["MyMemory Translation API", "Web Speech API (SpeechSynthesis)", "Clipboard API (navigator.clipboard)"],
+      patterns: ["DOMContentLoaded initialization", "querySelectorAll + forEach iteration", "async/await fetch pipeline", "Event delegation patterns"],
+      design: ["CSS gradients (linear-gradient)", "Inset shadows for depth", "Responsive breakpoints (5 tiers)", "Custom select styling with ::after arrow"],
+      infrastructure: ["Static HTML file — no build step", "ES Module import for countries list"],
+    },
+
+    architecture: {
+      title: "Vanilla JS Architecture (No Framework)",
+      description:
+        "Static three-file app — index.html, style.css, script.js — plus a countries.js module for the language map. No backend, no framework, no bundler.",
+      layers: [
+        { name: "Markup", items: ["index.html with textarea pair", "Language select dropdowns", "Icon buttons (copy, swap)", "Translate button + loading overlay"] },
+        { name: "Styling", items: ["CSS Grid for two-column text layout", "Flexbox for select + icon rows", "Linear gradient backgrounds", "Inset + outer box-shadows", "5 responsive breakpoints"] },
+        { name: "Logic", items: ["DOMContentLoaded bootstrap", "Language options injected from countries.js", "Translate button click handler (async)", "Copy/swap/speak event handlers", "Character counter live sync"] },
+        { name: "API", items: ["fetch() to MyMemory Translation API", "encodeURIComponent for query safety", "JSON parsing + error status check", "Loading/error UI state management"] },
+        { name: "Browser APIs", items: ["navigator.clipboard.writeText()", "document.execCommand('copy') fallback", "speechSynthesis.speak() for TTS", "SpeechSynthesisUtterance for voice config"] },
+      ],
+    },
+
+    servicesLabel: "Features",
+    middlewareLabel: "JS Patterns",
+
+    services: [
+      { name: "Translate Core", path: "script.js", type: "free", description: "Async click handler that reads inputs, encodes query, calls MyMemory API, renders translated text or error." },
+      { name: "Language Loader", path: "countries.js → script.js", type: "free", description: "Populates both language selects from a country-code-to-name map with defaults." },
+      { name: "Text-to-Speech", path: "script.js (speaker-icon)", type: "free", description: "Uses SpeechSynthesisUtterance to read text aloud in selected language." },
+      { name: "Copy to Clipboard", path: "script.js (copy-icon)", type: "free", description: "Copies text using Clipboard API with document.execCommand fallback." },
+      { name: "Language Swap", path: "script.js (swap-icon)", type: "free", description: "Swaps both source/target language AND text content between textareas." },
+      { name: "Character Counter", path: "script.js", type: "free", description: "Live character counts for both textareas — updates on every keystroke." },
+    ],
+
+    middleware: [
+      { name: "DOMContentLoaded", description: "All initialization runs after DOM ready — populates selects, binds listeners." },
+      { name: "querySelectorAll + forEach", description: "Batch binding for all .lang-select, .copy-icon, and .speaker-icon elements." },
+      { name: "async/await with try/catch", description: "Translation handler uses async/await with try/catch/finally." },
+      { name: "encodeURIComponent", description: "Every user text URL-encoded before query string — prevents broken URLs." },
+      { name: "Graceful Fallback (execCommand)", description: "If navigator.clipboard.writeText() fails, falls back to document.execCommand('copy')." },
+      { name: "CSS ::after Select Arrow", description: "Native select arrows hidden with appearance:none and replaced with custom ▼." },
+    ],
+
+    features: [
+      "100+ languages through a country-code map",
+      "MyMemory API for free translation",
+      "Live character counter for input and output",
+      "Text-to-speech via SpeechSynthesis",
+      "Copy to clipboard with fallback support",
+      "Language swap (languages + text together)",
+      "Auto-selected defaults (English → Urdu)",
+      "Loading spinner inside the translate button",
+      "Disabled state during requests",
+      "Error alerts and connection failure messages",
+      "Custom select styling with ::after arrow",
+      "Custom scrollbar for long option lists",
+      "CSS Grid two-column layout",
+      "Fully responsive across 5 breakpoints",
+      "Gradient theme with layered shadows",
+      "Zero dependencies — no React, no build step",
+      "ES Module import for the countries map",
+      "Works in any modern browser",
+    ],
+
+    challenges: [
+      "Handling async operations in vanilla JS without framework utilities",
+      "Managing button loading state without breaking layout",
+      "Copying text with cross-browser compatibility (Clipboard API + execCommand)",
+      "Preventing empty-input requests with graceful alerts",
+      "Dynamically generating 100+ option elements from a map",
+      "Styling native select dropdowns consistently across browsers",
+      "Making text-to-speech work with the correct language code",
+      "Swapping both languages AND text without state confusion",
+      "Keeping character counts in sync on every interaction",
+      "Handling API failures without breaking the UI",
+      "Ensuring the layout stays clean across 5 responsive breakpoints",
+      "Managing touch targets for icon buttons on mobile",
+    ],
+
+    learnings: [
+      "Vanilla JavaScript async/await without any framework",
+      "Native fetch API for third-party integrations",
+      "encodeURIComponent for safe URL query building",
+      "DOMContentLoaded and event listener patterns",
+      "querySelectorAll + forEach for batch event binding",
+      "Web Speech API (SpeechSynthesis + SpeechSynthesisUtterance)",
+      "Clipboard API with document.execCommand fallback",
+      "Dynamic DOM creation with createElement + appendChild",
+      "CSS Grid and Flexbox responsive layouts",
+      "Custom select styling with appearance:none and ::after",
+      "ES Modules (import/export) without a bundler",
+      "Media query design across 5 breakpoints",
+      "Reusable JS utility patterns (character counters, loading states)",
+    ],
+  },
+
+  
+  // 14. TAGCRAFT — AI Hashtag Generator
+  {
+    id: "tagcraft",
+    name: "TagCraft",
+    url: "/tagcraft.png",
+    technologies: ["Preact", "Vite", "Firebase Auth", "Firebase DB", "Gemini API", "Tailwind CSS"],
+    description:
+      "AI-powered hashtag & tag generator built with Preact + Vite and Firebase. Enter any keyword and instantly generate 50+ trending, optimized hashtags for YouTube, Instagram, TikTok, and more — with full authentication, search history, and a clean responsive UI.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "TagCraft is a modern AI-powered tag and hashtag generator that helps content creators optimize their reach across every major platform.",
+          "Built with Preact + Vite for blazing-fast performance, powered by Google's Gemini API for intelligent tag generation, and backed by Firebase for authentication and persistent user data.",
+          "It's a small tool, but a complete product — auth, database, AI generation, search history, and a polished marketing site.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "AI Tag Generation",
+        items: [
+          "Uses Gemini API to generate 50–100 trending hashtags per search",
+          "Robust JSON parsing with fallback regex extraction for reliable output",
+          "Ensures minimum 50 tags even when AI returns fewer",
+          "Handles Gemini API rate limits and error responses gracefully",
+          "Popular category quick-pick with 17 curated categories",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "User Experience & History",
+        items: [
+          "Search history (last 10) persisted in localStorage",
+          "One-click copy for individual tags or the entire list",
+          "Clipboard API with cross-browser fallback",
+          "Toast notifications via react-toastify for all states",
+          "Scroll-aware responsive header — categories hide on scroll",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "Firebase Authentication & Data",
+        paragraphs: [
+          "Firebase email/password authentication with a Google OAuth flow. User profiles, signup/login timestamps, and provider info are stored in Firebase Realtime Database.",
+          "Firebase auth error codes are mapped to user-friendly messages — no more cryptic 'auth/invalid-credential' errors reaching the user.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "Design & Performance",
+        paragraphs: [
+          "Preact + Vite gives TagCraft a tiny bundle size and lightning-fast load times. Tailwind CSS provides the responsive foundation, with a fully mobile-first layout.",
+          "The landing page includes Features, How It Works, Why Choose Us, Use Cases, and FAQ sections — all written to help content creators understand the value immediately.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "TagCraft taught me how to ship a complete product with a framework that isn't React — and how to make Firebase Auth feel invisible.",
+          "I learned Preact + Vite SPA architecture, Google Gemini API integration for content generation, Firebase Auth with email/password and Google OAuth, Firebase Realtime Database CRUD patterns, React Router DOM routing inside a Preact app, environment variable management with Vite, and how to write robust JSON parsing with fallback regex extraction.",
+          "Above all, I learned that content creators don't need a complex tool — they need a fast one that works the first time.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/TagCraft",
+    demoLink: "https://res.cloudinary.com/kw587fns/video/upload/v1791448173/tagcraft.mp4",
+    category: "AI / Content Tool",
+    year: "2026",
+    status: "Live",
+    role: "Full-Stack Developer",
+    duration: "6 weeks",
+    team: "Solo Project",
+
+    features: [
+      "AI-powered generation of 50+ trending hashtags per search",
+      "Popular category quick-pick (17 curated categories)",
+      "Search history (last 10) persisted in localStorage",
+      "One-click copy for individual tags or full list",
+      "Firebase email/password authentication",
+      "Google OAuth signup and login",
+      "Firebase Realtime Database for user profiles",
+      "React Router DOM SPA navigation",
+      "Toast notifications via react-toastify",
+      "Scroll-aware responsive header",
+      "Dedicated Features, How It Works & FAQ sections",
+      "Preact + Vite for ultra-lightweight performance",
+    ],
+
+    challenges: [
+      "Cleaning and parsing AI JSON responses that include markdown fences",
+      "Ensuring minimum 50 tags even when AI returns fewer",
+      "Handling Gemini API rate limits and error responses gracefully",
+      "Mapping Firebase auth error codes to user-friendly messages",
+      "Building a scroll-aware header that hides categories without layout shift",
+      "Making Preact + React Router + react-toastify work seamlessly together",
+      "Managing Realtime Database writes for both email and Google auth flows",
+      "Ensuring clipboard copy works across mobile browsers",
+    ],
+
+    learnings: [
+      "Preact + Vite SPA architecture",
+      "Google Gemini API integration for content generation",
+      "Firebase Auth with email/password and Google OAuth",
+      "Firebase Realtime Database CRUD patterns",
+      "React Router DOM routing in a Preact app",
+      "Environment variable management with Vite (.env)",
+      "Tailwind CSS responsive design at scale",
+      "Toast notification UX patterns",
+      "Clipboard API and cross-browser fallbacks",
+      "Robust JSON parsing with fallback regex extraction",
+    ],
+  },
+
+  
+  // 15. AI MINI PROJECTS — Collection of AI Experiments
+  {
+    id: "ai-mini-projects",
+    name: "AI Mini Projects",
+    url: "/aimini.png",
+    technologies: ["Groq SDK", "Gemini AI", "LangChain", "Pinecone", "Node.js", "Express.js"],
+    description:
+      "A collection of hands-on AI experiments built while mastering LLM integration — including an AI Expense Agent with tool calling, encrypted chat history with MongoDB, a coding-only AI tutor, a PDF-based RAG chatbot with Pinecone, a voice AI assistant, and an AI website generator using Gemini.",
+
+    descriptionSections: [
+      {
+        icon: "intro",
+        paragraphs: [
+          "AI Mini Projects is a curated collection of hands-on experiments I built while learning and mastering real-world AI/LLM integration.",
+          "Each project isolates and explores a different core concept — from tool calling and RAG to voice interfaces and AI-powered code generation.",
+          "Together, they represent my journey from 'calling an API' to 'designing AI systems' — the same progression that prepared me for the bigger projects like Solvix and SaviPulse.",
+        ],
+      },
+      {
+        icon: "robot",
+        heading: "The Six Experiments",
+        items: [
+          "AI Expense Agent — Groq tool calling with balance tracking and overspending prevention",
+          "AI Chat with Encrypted History — MongoDB + AES-256-CBC encryption for persistent conversations",
+          "Coding-Only AI Tutor — Custom system prompt restricting the AI to programming topics",
+          "PDF RAG Chatbot — LangChain + Gemini embeddings + Pinecone vector store",
+          "Voice AI Assistant — Web Speech API + Groq LLaMA 3.3 70B + Express backend",
+          "AI Website Generator — Gemini 2.5 Flash producing full HTML/CSS/JS from a prompt",
+        ],
+      },
+      {
+        icon: "briefcase",
+        heading: "What Each Experiment Teaches",
+        items: [
+          "Tool calling — how LLMs can invoke functions to interact with real data",
+          "Symmetric encryption — how to persist sensitive data securely in MongoDB",
+          "Prompt engineering — how to constrain an LLM to a strict domain",
+          "RAG architecture — how to make LLMs answer from your own documents",
+          "Voice interfaces — how to bridge browser audio with AI backends",
+          "Creative generation — how to make LLMs produce usable code",
+        ],
+      },
+      {
+        icon: "pipeline",
+        heading: "The Complete Learning Journey",
+        paragraphs: [
+          "AI Expense Agent (tool calling) → Encrypted Chat (persistence) → Coding Tutor (prompt engineering) → RAG Chatbot (retrieval) → Voice Assistant (multimodal) → Website Generator (creative AI).",
+          "Each project builds on the previous one. By the end, I had touched every major pattern in modern AI engineering — tool calling, embeddings, vector search, encryption, voice, and code generation.",
+        ],
+      },
+      {
+        icon: "creditCard",
+        heading: "The RAG Pipeline (Deep Dive)",
+        paragraphs: [
+          "The PDF RAG Chatbot loads a PDF, splits it with RecursiveCharacterTextSplitter, embeds the chunks using Gemini embeddings, stores them in Pinecone, and answers user questions using only the retrieved context.",
+          "This is the exact same architecture that powers Solvix's file analysis feature — the small experiment became a building block for the larger system.",
+        ],
+      },
+      {
+        icon: "rocket",
+        heading: "What I Learned",
+        paragraphs: [
+          "This collection taught me that AI engineering is not just prompting — it's architecture, safety, and reliability.",
+          "I learned Groq SDK and LLaMA model integration, OpenAI-style function/tool calling patterns, symmetric encryption (AES-256-CBC) in Node.js, MongoDB persistence with Mongoose schemas, RAG architecture with LangChain + Pinecone, Gemini embeddings and similarity search, Web Speech API (recognition + synthesis), Express.js CORS and JSON APIs, prompt engineering and system prompt design, and Gemini 2.5 Flash for creative generation.",
+          "Above all, I learned that the fastest way to master a technology is to build six small things with it — not one big thing.",
+        ],
+      },
+    ],
+
+    githubLink: "https://github.com/SirajAbid17/GENAI_Practice_Project",
+    category: "AI / Learning Projects",
+    year: "2026",
+    status: "Live",
+    role: "AI Developer",
+    duration: "2 months",
+    team: "Solo Project",
+
+    features: [
+      "AI Expense Agent with Groq tool calling",
+      "Balance tracking & overspending prevention",
+      "MongoDB chat history with AES-256-CBC encryption",
+      "Coding-only AI tutor with strict system prompt",
+      "PDF RAG pipeline with LangChain + Pinecone",
+      "Gemini embeddings for semantic search",
+      "Voice input via Web Speech API",
+      "AI text-to-speech responses",
+      "Groq LLaMA 3.3 70B integration",
+      "AI website generator with Gemini 2.5 Flash",
+      "3-retry fallback system for reliability",
+      "Auto-open generated site in browser",
+    ],
+
+    challenges: [
+      "Implementing reliable tool/function calling with Groq SDK",
+      "Handling AES-256-CBC encryption/decryption for chat persistence",
+      "Chunking PDFs correctly for accurate RAG retrieval",
+      "Managing Pinecone vector store with LangChain",
+      "Bridging browser Speech API with a secure Express backend",
+      "CORS handling for the voice assistant frontend-backend flow",
+      "Prompt engineering to restrict AI to coding-only topics",
+      "Building retry logic for unreliable AI API responses",
+    ],
+
+    learnings: [
+      "Groq SDK and LLaMA model integration",
+      "OpenAI-style function/tool calling patterns",
+      "Symmetric encryption (AES-256-CBC) in Node.js",
+      "MongoDB persistence with Mongoose schemas",
+      "RAG architecture with LangChain + Pinecone",
+      "Gemini embeddings and similarity search",
+      "Web Speech API (recognition + synthesis)",
+      "Express.js CORS and JSON APIs",
+      "Prompt engineering and system prompt design",
+      "Gemini 2.5 Flash for creative generation tasks",
+    ],
+  },
+];
+
+export default projects;

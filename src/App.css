@@ -1,0 +1,282 @@
+
+:root {
+  --bg-primary: #121524;
+  --bg-secondary: #0f1220;
+  --bg-surface: rgba(255, 255, 255, 0.04);
+  --bg-surface-hover: rgba(255, 255, 255, 0.08);
+  --text-primary: #f2f3f8;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(124, 140, 255, 0.4);
+  --shadow-color: rgba(0, 0, 0, 0.35);
+
+  
+  --accent: #7c8cff;
+  --accent-2: #b06cff;
+  --accent-3: #ff6cc1;
+  --accent-gradient: linear-gradient(135deg, #7c8cff 0%, #b06cff 55%, #ff6cc1 100%);
+  --accent-glow: rgba(124, 140, 255, 0.45);
+  --accent-glow-2: rgba(176, 108, 255, 0.4);
+  --accent-glow-3: rgba(255, 108, 193, 0.35);
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.06);
+}
+
+
+[data-theme="light"],
+body.light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7fa;
+  --bg-surface: rgba(0, 0, 0, 0.03);
+  --bg-surface-hover: rgba(0, 0, 0, 0.06);
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a5e;
+  --text-muted: #8a8a9e;
+  --border-color: rgba(0, 0, 0, 0.06);
+  --border-hover: rgba(124, 140, 255, 0.35);
+  --shadow-color: rgba(0, 0, 0, 0.08);
+
+  --accent: #7c8cff;
+  --accent-2: #b06cff;
+  --accent-3: #ff6cc1;
+  --accent-gradient: linear-gradient(135deg, #7c8cff 0%, #b06cff 55%, #ff6cc1 100%);
+  --accent-glow: rgba(124, 140, 255, 0.3);
+  --accent-glow-2: rgba(176, 108, 255, 0.25);
+  --accent-glow-3: rgba(255, 108, 193, 0.2);
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.04);
+}
+
+body.dark {
+  --bg-primary: #121524;
+  --bg-secondary: #0f1220;
+  --bg-surface: rgba(255, 255, 255, 0.04);
+  --bg-surface-hover: rgba(255, 255, 255, 0.08);
+  --text-primary: #f2f3f8;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(124, 140, 255, 0.4);
+  --shadow-color: rgba(0, 0, 0, 0.35);
+
+  --accent: #7c8cff;
+  --accent-2: #b06cff;
+  --accent-3: #ff6cc1;
+  --accent-gradient: linear-gradient(135deg, #7c8cff 0%, #b06cff 55%, #ff6cc1 100%);
+  --accent-glow: rgba(124, 140, 255, 0.45);
+  --accent-glow-2: rgba(176, 108, 255, 0.4);
+  --accent-glow-3: rgba(255, 108, 193, 0.35);
+}
+
+.app {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+              color 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+
+.gradient-text {
+  background: var(--accent-gradient);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+.accent-glow {
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.accent-border {
+  border-color: var(--accent);
+}
+
+
+/* Project Loading Screen */
+.project-loading {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(75, 91, 180, 0.12),
+      transparent 45%
+    ),
+    #0f1220;
+  color: #ffffff;
+  overflow: hidden;
+  font-family: inherit;
+}
+
+.project-loader {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.loader-ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid transparent;
+  border-top-color: #7c8cff;
+  border-right-color: #7c8cff;
+  border-radius: 50%;
+  animation: projectSpin 1.2s linear infinite;
+  filter: drop-shadow(0 0 7px rgba(124, 140, 255, 0.6));
+}
+
+.loader-ring-inner {
+  inset: 12px;
+  border-top-color: #42e8c5;
+  border-right-color: transparent;
+  border-bottom-color: #42e8c5;
+  animation: projectSpinReverse 1.8s linear infinite;
+}
+
+.loader-icon {
+  font-size: 23px;
+  font-weight: 800;
+  color: #a6b0ff;
+  animation: iconPulse 1.5s ease-in-out infinite;
+}
+
+.loading-title {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #e5e9ff;
+}
+
+.loading-dots {
+  display: inline-flex;
+  margin-left: 3px;
+}
+
+.loading-dots span {
+  animation: dotBounce 1.2s infinite;
+  color: #7c8cff;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.loading-subtitle {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #929bb9;
+  animation: subtitleFade 2s ease-in-out infinite;
+}
+
+.loading-progress {
+  width: 180px;
+  height: 3px;
+  border-radius: 10px;
+  background: #252a40;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.loading-progress-bar {
+  width: 40%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7c8cff, #42e8c5);
+  box-shadow: 0 0 12px rgba(124, 140, 255, 0.7);
+  animation: progressMove 1.5s ease-in-out infinite;
+}
+
+@keyframes projectSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes projectSpinReverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    opacity: 0.65;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes dotBounce {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes subtitleFade {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes progressMove {
+  0% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-loading *,
+  .project-loading *::before,
+  .project-loading *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
